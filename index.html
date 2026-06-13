@@ -204,12 +204,14 @@
         Sistem kuralları gereği girilen metin meşru ve teknik sınırlar içinde olmalıdır. Lütfen uygun kelimeler kullanınız.
     </div>
 
+    <!-- Sekme Menüsü -->
     <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('prompt-tab')">Akıllı Komut Sihirbazı</button>
-        <button class="tab-btn" onclick="switchTab('markdown-tab')">Dijital Not & Markdown Dönüştürücü</button>
-        <button class="tab-btn" onclick="switchTab('seo-tab')">Teknik SEO & Başlık Robotu</button>
+        <button class="tab-btn active" data-target="prompt-tab">Akıllı Komut Sihirbazı</button>
+        <button class="tab-btn" data-target="markdown-tab">Dijital Not & Markdown Dönüştürücü</button>
+        <button class="tab-btn" data-target="seo-tab">Teknik SEO & Başlık Robotu</button>
     </div>
 
+    <!-- 1. ARAÇ: PROMPT SİHİRBAZI -->
     <div id="prompt-tab" class="tool-content active">
         <h3>Akıllı Komut Sihirbazı</h3>
         <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -0.5rem;">Yapay zekadan en doğru teknik çıktıyı almak için meşru ve kurumsal şablonlar üretin.</p>
@@ -228,7 +230,7 @@
             <textarea id="prompt-input" placeholder="Örn: Python ile hızlı çalışan bir veri sıralama algoritması hazırlamak istiyorum..."></textarea>
         </div>
 
-        <button class="btn" onclick="generatePrompt()">Komut Şablonunu Hazırla</button>
+        <button class="btn" id="btn-prompt">Komut Şablonunu Hazırla</button>
 
         <div class="output-area" id="prompt-output-box" style="display:none;">
             <div class="output-header">
@@ -238,6 +240,7 @@
         </div>
     </div>
 
+    <!-- 2. ARAÇ: MARKDOWN DÖNÜŞTÜRÜCÜ -->
     <div id="markdown-tab" class="tool-content">
         <h3>Dijital Not & Markdown Dönüştürücü</h3>
         <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -0.5rem;">Düz metinleri veya yapay zeka çıktılarını Obsidian ve Notion uyumlu temiz Markdown formatına getirin.</p>
@@ -247,4 +250,144 @@
             <textarea id="md-input" placeholder="Buraya biçimlendirmek istediğiniz ham notları ekleyin..."></textarea>
         </div>
 
-        <button class="btn" onclick="
+        <button class="btn" id="btn-markdown">Markdown Formatına Çevir</button>
+
+        <div class="output-area" id="md-output-box" style="display:none;">
+            <div class="output-header">
+                <span>Obsidian / Notion Uyumlu Çıktı:</span>
+            </div>
+            <pre id="md-output"></pre>
+        </div>
+    </div>
+
+    <!-- 3. ARAÇ: SEO ROBOTU -->
+    <div id="seo-tab" class="tool-content">
+        <h3>Teknik SEO & Başlık Robotu</h3>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -0.5rem;">Web projeleriniz ve teknik makaleleriniz için tıklama oranı yüksek, temiz başlık alternatifleri geliştirin.</p>
+        
+        <div class="form-group">
+            <label for="seo-input">Makale Konusu veya Anahtar Kelimeler</label>
+            <input type="text" id="seo-input" placeholder="Örn: Veri tabanı optimizasyonu, statik web sitesi kurulumu">
+        </div>
+
+        <button class="btn" id="btn-seo">Alternatif Başlıkları Üret</button>
+
+        <div class="output-area" id="seo-output-box" style="display:none;">
+            <div class="output-header">
+                <span>SEO Uyumlu Başlık Önerileri:</span>
+            </div>
+            <pre id="seo-output"></pre>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 PromptForge. Tüm Hakları Saklıdır. Güvenli, Bağımsız ve Teknik Dijital Çözümler.</p>
+</footer>
+
+<script>
+    // Koruma Filtresi
+    const forbiddenWords = [
+        "reels", "tiktok", "dans", "müzik", "şarkı", "magazin", 
+        "kredi", "faiz", "kumar", "bahis", "flört", "sevgili", 
+        "müstehcen", "çıplak", "büyü", "fal", "heykel", "resim çiz"
+    ];
+
+    function checkContentSafety(text) {
+        const lowerText = text.toLowerCase();
+        for (let word of forbiddenWords) {
+            if (lowerText.includes(word)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function showAlert() {
+        const alertBox = document.getElementById("filter-alert");
+        alertBox.style.display = "block";
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(() => { alertBox.style.display = "none"; }, 6000);
+    }
+
+    // Sekme Geçiş Tetikleyicileri
+    document.querySelectorAll('.tab-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const target = this.getAttribute('data-target');
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tool-content').forEach(content => content.classList.remove('active'));
+            
+            this.classList.add('active');
+            document.getElementById(target).classList.add('active');
+        });
+    });
+
+    // 1. Araç Tetikleyicisi
+    document.getElementById('btn-prompt').addEventListener('click', function() {
+        const input = document.getElementById("prompt-input").value;
+        const category = document.getElementById("prompt-category").value;
+        
+        if(!input.trim()) return;
+
+        if (!checkContentSafety(input)) {
+            showAlert();
+            return;
+        }
+
+        let outputText = `Aşağıdaki konu hakkında uzman bir danışman gibi davranmanı istiyorum.\n`;
+        outputText += `Çalışma Alanı: Semantik ve Teknik ${category.toUpperCase()} Yönetimi\n\n`;
+        outputText += `İçerik ve Detaylar:\n"${input}"\n\n`;
+        outputText += `Senden İsteğim: Lütfen bu konuyu yapılandırılmış, gereksiz süslemelerden uzak, doğrudan teknik adımlarla ve tamamen doğrulanabilir mantık çerçevesinde analiz ederek bana sun.`;
+
+        document.getElementById("prompt-output").textContent = outputText;
+        document.getElementById("prompt-output-box").style.display = "block";
+    </script>
+    <script>
+    // 2. Araç Tetikleyicisi
+    document.getElementById('btn-markdown').addEventListener('click', function() {
+        const input = document.getElementById("md-input").value;
+        
+        if(!input.trim()) return;
+
+        if (!checkContentSafety(input)) {
+            showAlert();
+            return;
+        }
+
+        let lines = input.split('\n');
+        let formattedLines = lines.map((line, index) => {
+            if(index === 0 && !line.startsWith('#')) return `# ${line}`;
+            if(line.length > 0 && line.length < 40 && !line.startsWith('##')) return `## ${line}`;
+            return line;
+        });
+
+        let outputText = `%% Obsidian & Notion Otomatik Ayrıştırma Notu %%\n\n` + formattedLines.join('\n');
+        
+        document.getElementById("md-output").textContent = outputText;
+        document.getElementById("md-output-box").style.display = "block";
+    });
+
+    // 3. Araç Tetikleyicisi
+    document.getElementById('btn-seo').addEventListener('click', function() {
+        const input = document.getElementById("seo-input").value;
+        
+        if(!input.trim()) return;
+
+        if (!checkContentSafety(input)) {
+            showAlert();
+            return;
+        }
+
+        let outputText = `1. Teknik Rehber: ${input} Nasıl Yapılır ve Optimizasyon Adımları\n`;
+        outputText += `2. ${input} Güvenliği: Derinlemesine İnceleme ve Modern Yaklaşımlar\n`;
+        outputText += `3. En İnce Detaylarıyla ${input} Yönetimi ve Süreç Analizi\n`;
+        outputText += `4. Minimalist ve Performans Odaklı ${input} Yapılandırması`;
+
+        document.getElementById("seo-output").textContent = outputText;
+        document.getElementById("seo-output-box").style.display = "block";
+    });
+</script>
+
+</body>
+</html>
