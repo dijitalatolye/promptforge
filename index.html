@@ -1,1 +1,250 @@
-<h1>PromptForge Çok Yakında Yayında!</h1>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PromptForge - Dijital Üretkenlik ve Teknik Metin Araçları</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-color: #c9d1d9;
+            --text-muted: #8b949e;
+            --primary-color: #2ea44f;
+            --primary-hover: #2c974b;
+            --danger-color: #f85149;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+            text-align: center;
+            background-color: var(--card-bg);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        header h1 span {
+            color: var(--primary-color);
+        }
+
+        header p {
+            margin: 0.5rem 0 0 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.7rem 1.2rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: #fff;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .tool-content {
+            display: none;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.5rem;
+        }
+
+        .tool-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 0.6rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .output-area {
+            margin-top: 1.5rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem;
+            position: relative;
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: monospace;
+            font-size: 0.95rem;
+        }
+
+        .alert {
+            background-color: rgba(248, 81, 73, 0.1);
+            border: 1px solid var(--danger-color);
+            color: var(--danger-color);
+            padding: 0.8rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            display: none;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 1.5rem 0;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Prompt<span>Forge</span></h1>
+    <p>Teknik İçerik, Dijital Not ve İş Akışı Optimizasyon Çözümleri</p>
+</header>
+
+<div class="container">
+    <div id="filter-alert" class="alert">
+        Sistem kuralları gereği girilen metin meşru ve teknik sınırlar içinde olmalıdır. Lütfen uygun kelimeler kullanınız.
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('prompt-tab')">Akıllı Komut Sihirbazı</button>
+        <button class="tab-btn" onclick="switchTab('markdown-tab')">Dijital Not & Markdown Dönüştürücü</button>
+        <button class="tab-btn" onclick="switchTab('seo-tab')">Teknik SEO & Başlık Robotu</button>
+    </div>
+
+    <div id="prompt-tab" class="tool-content active">
+        <h3>Akıllı Komut Sihirbazı</h3>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -0.5rem;">Yapay zekadan en doğru teknik çıktıyı almak için meşru ve kurumsal şablonlar üretin.</p>
+        
+        <div class="form-group">
+            <label for="prompt-category">Çalışma Alanı Seçin</label>
+            <select id="prompt-category">
+                <option value="yazilim">Yazılım Geliştirme ve Kod Blokları</option>
+                <option value="egitim">Eğitim, Makale Özetleme ve Kitap Analizi</option>
+                <option value="is">İş Planlama ve Proje Yönetimi</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="prompt-input">Konuyu veya Proje Detayını Giriniz</label>
+            <textarea id="prompt-input" placeholder="Örn: Python ile hızlı çalışan bir veri sıralama algoritması hazırlamak istiyorum..."></textarea>
+        </div>
+
+        <button class="btn" onclick="generatePrompt()">Komut Şablonunu Hazırla</button>
+
+        <div class="output-area" id="prompt-output-box" style="display:none;">
+            <div class="output-header">
+                <span>Üretilen Profesyonel Komut (Prompt):</span>
+            </div>
+            <pre id="prompt-output"></pre>
+        </div>
+    </div>
+
+    <div id="markdown-tab" class="tool-content">
+        <h3>Dijital Not & Markdown Dönüştürücü</h3>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -0.5rem;">Düz metinleri veya yapay zeka çıktılarını Obsidian ve Notion uyumlu temiz Markdown formatına getirin.</p>
+        
+        <div class="form-group">
+            <label for="md-input">Düz Metni Yapıştırın</label>
+            <textarea id="md-input" placeholder="Buraya biçimlendirmek istediğiniz ham notları ekleyin..."></textarea>
+        </div>
+
+        <button class="btn" onclick="
