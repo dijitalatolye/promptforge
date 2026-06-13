@@ -1,1 +1,459 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PromptForge - Dijital Üretkenlik ve Teknik Metin Araçları</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-color: #c9d1d9;
+            --text-muted: #8b949e;
+            --primary-color: #2ea44f;
+            --primary-hover: #2c974b;
+            --danger-color: #f85149;
+            --accent-color: #58a6ff;
+        }
 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+            text-align: center;
+            background-color: var(--card-bg);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        header h1 span {
+            color: var(--primary-color);
+        }
+
+        header p {
+            margin: 0.5rem 0 0 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.7rem 1.2rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: #fff;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .tool-content {
+            display: none;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.5rem;
+        }
+
+        .tool-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 0.6rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-copy {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--accent-color);
+        }
+
+        .btn-copy:hover {
+            background-color: rgba(88, 166, 255, 0.1);
+            border-color: var(--accent-color);
+        }
+
+        .output-area {
+            margin-top: 1.5rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem;
+            position: relative;
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: monospace;
+            font-size: 0.95rem;
+            padding-top: 0.5rem;
+            color: #e6edf3;
+        }
+
+        .alert {
+            background-color: rgba(248, 81, 73, 0.1);
+            border: 1px solid var(--danger-color);
+            color: var(--danger-color);
+            padding: 0.8rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            display: none;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 1.5rem 0;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Prompt<span>Forge</span></h1>
+    <p>Teknik İçerik, Dijital Not ve İş Akışı Optimizasyon Çözümleri</p>
+</header>
+
+<div class="container">
+    <div id="filter-alert" class="alert">
+        Sistem kuralları gereği girilen metin meşru ve teknik sınırlar içinde olmalıdır. Lütfen uygun kelimeler kullanınız.
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" data-target="prompt-tab">Akıllı Komut Sihirbazı</button>
+        <button class="tab-btn" data-target="markdown-tab">Dijital Not & Markdown Dönüştürücü</button>
+        <button class="tab-btn" data-target="seo-tab">Teknik SEO & Başlık Robotu</button>
+    </div>
+
+    <div id="prompt-tab" class="tool-content active">
+        <h3>Akıllı Komut Sihirbazı</h3>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -0.5rem;">Yapay zekadan en doğru teknik çıktıyı almak için yapılandırılmış kurumsal şablonlar üretin.</p>
+        
+        <div class="form-group">
+            <label for="prompt-category">Çalışma Amacınızı Seçin</label>
+            <select id="prompt-category">
+                <option value="yazilim_refactor">Yazılım Geliştirme: Kod Optimizasyonu ve Hata Ayıklama</option>
+                <option value="yazilim_mimari">Yazılım Geliştirme: Temiz Mimari ve Veri Tabanı Tasarımı</option>
+                <option value="egitim_analiz">Akademik/Eğitim: Kitap Analizi ve Kritik Özet Çıkarma</option>
+                <option value="is_dokuman">İş Dünyası: Proje Yönetimi ve Teknik Şartname Hazırlama</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="prompt-input">Üretilecek Konu veya Proje Detaylarını Yazın</label>
+            <textarea id="prompt-input" placeholder="Örn: SQL veri tabanında büyük verileri sorgularken yaşanan yavaşlama sorununu çözmek için indeksleme stratejisi..."></textarea>
+        </div>
+
+        <button class="btn" id="btn-prompt">Profesyonel Komut Üret</button>
+
+        <div class="output-area" id="prompt-output-box" style="display:none;">
+            <div class="output-header">
+                <span>Üretilen Gelişmiş Komut Yapısı:</span>
+                <button class="btn btn-copy" id="copy-prompt">Metni Kopyala</button>
+            </div>
+            <pre id="prompt-output"></pre>
+        </div>
+    </div>
+
+    <div id="markdown-tab" class="tool-content">
+        <h3>Dijital Not & Markdown Dönüştürücü</h3>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -0.5rem;">Düz metinleri Obsidian ve Notion entegrasyonuna tam uyumlu yapılandırılmış notlara çevirin.</p>
+        
+        <div class="form-group">
+            <label for="md-input">Ham Notları veya Yapay Zeka Çıktısını Yapıştırın</label>
+            <textarea id="md-input" placeholder="Buraya biçimlendirmek istediğiniz düz metinleri ekleyin..."></textarea>
+        </div>
+
+        <button class="btn" id="btn-markdown">Markdown Standartlarına Dönüştür</button>
+
+        <div class="output-area" id="md-output-box" style="display:none;">
+            <div class="output-header">
+                <span>Obsidian Bilgi Tabanı (.md) Formatı:</span>
+                <button class="btn btn-copy" id="copy-markdown">Notu Kopyala</button>
+            </div>
+            <pre id="md-output"></pre>
+        </div>
+    </div>
+
+    <div id="seo-tab" class="tool-content">
+        <h3>Teknik SEO & Başlık Robotu</h3>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -0.5rem;">Teknik makaleleriniz ve web sayfalarınız için yüksek tıklama oranlı 10 farklı kombinasyon.</p>
+        
+        <div class="form-group">
+            <label for="seo-input">Odaklanılacak Anahtar Kelime veya Teknik Konu</label>
+            <input type="text" id="seo-input" placeholder="Örn: Git komutları rehberi, temiz kod yazma ilkeleri">
+        </div>
+
+        <button class="btn" id="btn-seo">Gelişmiş SEO Paketini Üret</button>
+
+        <div class="output-area" id="seo-output-box" style="display:none;">
+            <div class="output-header">
+                <span>SEO Başlık Kombinasyonları ve Meta Verileri:</span>
+                <button class="btn btn-copy" id="copy-seo">Tümünü Kopyala</button>
+            </div>
+            <pre id="seo-output"></pre>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 PromptForge. Tüm Hakları Saklıdır. Güvenli, Bağımsız ve Teknik Dijital Çözümler.</p>
+</footer>
+
+<script>
+    // Hassasiyet Koruma Filtresi
+    const forbiddenWords = [
+        "reels", "tiktok", "dans", "müzik", "şarkı", "magazin", 
+        "kredi", "faiz", "kumar", "bahis", "flört", "sevgili", 
+        "müstehcen", "çıplak", "büyü", "fal", "heykel", "resim çiz"
+    ];
+
+    function checkContentSafety(text) {
+        const lowerText = text.toLowerCase();
+        for (let word of forbiddenWords) {
+            if (lowerText.includes(word)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function showAlert() {
+        const alertBox = document.getElementById("filter-alert");
+        alertBox.style.display = "block";
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(() => { alertBox.style.display = "none"; }, 6000);
+    }
+
+    function copyToClipboard(elementId, btnId) {
+        const text = document.getElementById(elementId).textContent;
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = document.getElementById(btnId);
+            const originalText = btn.textContent;
+            btn.textContent = "Kopyalandı!";
+            btn.style.borderColor = "#2ea44f";
+            btn.style.color = "#2ea44f";
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.borderColor = "";
+                btn.style.color = "";
+            }, 2000);
+        });
+    }
+
+    // Sekme Geçişleri
+    document.querySelectorAll('.tab-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const target = this.getAttribute('data-target');
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tool-content').forEach(content => content.classList.remove('active'));
+            this.classList.add('active');
+            document.getElementById(target).classList.add('active');
+        });
+    });
+
+    // 1. Gelişmiş Prompt Sihirbazı
+    document.getElementById('btn-prompt').addEventListener('click', function() {
+        const input = document.getElementById("prompt-input").value;
+        const category = document.getElementById("prompt-category").value;
+        
+        if(!input.trim()) return;
+        if (!checkContentSafety(input)) { showAlert(); return; }
+
+        let role = "";
+        let instructions = "";
+
+        if(category === "yazilim_refactor") {
+            role = "Kıdemli Yazılım Optimizasyon Uzmanı ve Baş Refactor Mimarı";
+            instructions = "- Kodu bellek yönetimi, işlemci yükü ve okunabilirlik açısından optimize et.\n- Varsa potansiyel güvenlik açıklarını (SQL Injection, XSS vb.) belirt.\n- Değişiklikleri gerekçeleriyle açıkla.";
+        } else if(category === "yazilim_mimari") {
+            role = "Yazılım Mimarisi ve Veri Tabanı Tasarımcısı";
+            instructions = "- Ölçeklenebilir, genişletilebilir ve SOLID prensiplerine uygun bir yapı tasarla.\n- Veri tabanı ilişkilerini (1-N, N-M) ve indeksleme noktalarını netleştir.\n- Performans darboğazlarını önleyecek öneriler sun.";
+        } else if(category === "egitim_analiz") {
+            role = "Akademik Analist ve Literatür Araştırmacısı";
+            instructions = "- Metnin/Kitabın ana tezini ve alt argümanlarını yapılandırılmış olarak çıkar.\n- Metindeki metodolojik yaklaşımları tarafsızca değerlendir.\n- Önemli çıkarımları maddeler halinde mantık sırasına göre özetle.";
+        } else {
+            role = "Kıdemli Proje Yöneticisi ve İş Analisti";
+            instructions = "- Belirtilen iş senaryosunun teknik gereksinimlerini ve risk analizini çıkar.\n- Süreç akış adımlarını mantıksal bir sıra ile şablonlaştır.\n- Çıktıyı kurumsal raporlama diline uygun olarak teslim et.";
+        }
+
+        let output = `[ROL VE YETKİNLİK]\nSen bir ${role} olarak görev yapmaktasın.\n\n`;
+        output += `[BAĞLAM VE GÖREV DETAYI]\nSana yönlendirilen teknik konu/sorun şu şekildedir:\n"${input}"\n\n`;
+        output += `[KATI ÇALIŞMA TALİMATLARI]\nBu görevi yerine getirirken aşağıdaki maddelere harfiyen uyman gerekmektedir:\n${instructions}\n`;
+        output += `- Cevapta gereksiz giriş cümleleri, kişisel yorumlar veya yüzeysel süslemeler kullanma.\n`;
+        output += `- Doğrudan yapılandırılmış, başlıklandırılmış ve teknik doğruluğu yüksek çıktılar üret.`;
+
+        document.getElementById("prompt-output").textContent = output;
+        document.getElementById("prompt-output-box").style.display = "block";
+    });
+
+    // 2. Gelişmiş Markdown Dönüştürücü
+    document.getElementById('btn-markdown').addEventListener('click', function() {
+        const input = document.getElementById("md-input").value;
+        
+        if(!input.trim()) return;
+        if (!checkContentSafety(input)) { showAlert(); return; }
+
+        let lines = input.split('\n');
+        let formattedLines = lines.map((line, index) => {
+            let trimmed = line.trim();
+            if(index === 0 && !trimmed.startsWith('#')) return `# ${trimmed}`;
+            if(trimmed.length > 0 && trimmed.length < 50 && !trimmed.startsWith('#') && !trimmed.startsWith('-') && !trimmed.match(/^\d+\./)) {
+                return `\n## ${trimmed}`;
+            }
+            if(trimmed.startsWith('* ') || trimmed.startsWith('- ')) return `- ${trimmed.substring(2)}`;
+            return line;
+        });
+
+        let output = `---\ntype: teknik_not\ntags:\n  - not/teknik\n  - uretkenlik/bilgi\ndate: 2026-06-13\n---\n\n`;
+        output += `%% Obsidian & Notion Otomatik Bilgi Sistemi Ayrıştırması %%\n\n`;
+        output += formattedLines.join('\n');
+        
+        document.getElementById("md-output").textContent = output;
+        document.getElementById("md-output-box").style.display = "block";
+    });
+
+    // 3. Gelişmiş SEO Başlık Robotu
+    document.getElementById('btn-seo').addEventListener('click', function() {
+        const input = document.getElementById("seo-input").value;
+        
+        if(!input.trim()) return;
+        if (!checkContentSafety(input)) { showAlert(); return; }
+
+        let output = `=== A) TIKLAMA ORANI YÜKSEK (CTR) BAŞLIK KOMBİNASYONLARI ===\n\n`;
+        output += `[Kategori 1: Kapsamlı Teknik Rehberler]\n`;
+        output += `1. Derinlemesine İnceleme: A'dan Z'ye ${input} Mimarisi\n`;
+        output += `2. Adım Adım Rehber: ${input} Kurulumu ve İpuçları\n\n`;
+        
+        output += `[Kategori 2: Performans ve Sorun Çözümü]\n`;
+        output += `3. Performans Odaklı ${input}: En İyi Entegrasyon Yolları\n`;
+        output += `4. Pratik Çözümler: ${input} Yapılandırmasında Sık Yapılan Hatalar\n\n`;
+        
+        output += `[Kategori 3: Minimalist ve Modern Yaklaşımlar]\n`;
+        output += `5. Geliştiriciler İçin Hafif ve Hızlı ${input} Rehberi\n`;
+        output += `6. Modern Süreçlerde ${input} Kullanımı ve Teknik Stratejiler\n\n`;
+
+        output += `=== B) ARMA MOTORU OPTİMİZASYONU (META VERİLERİ) ===\n\n`;
+        output += `[Önerilen URL Yapısı (Slug)]\n`;
+        output += `-> /teknik-rehber-${input.toLowerCase().replace(/[^a-z0-9/s]/g, '').replace(/\s+/g, '-')}\n\n`;
+        output += `[Arama Motoru Açıklama Şablonu (Meta Description)]\n`;
+        output += `-> Projelerinizde ${input} süreçlerini optimize etmek, yapısal hataları önlemek ve en yüksek performansı elde etmek için uygulamanız gereken teknik adımlar bu rehberde.`;
+
+        document.getElementById("seo-output").textContent = output;
+        document.getElementById("seo-output-box").style.display = "block";
+    });
+
+    // Kopyalama Buton Atamaları
+    document.getElementById('copy-prompt').addEventListener('click', () => copyToClipboard('prompt-output', 'copy-prompt'));
+    document.getElementById('copy-markdown').addEventListener('click', () => copyToClipboard('md-output', 'copy-markdown'));
+    document.getElementById('copy-seo').addEventListener('click', () => copyToClipboard('seo-output', 'copy-seo'));
+</script>
+
+</body>
+</html>
