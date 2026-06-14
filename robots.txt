@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemizin haritasını Google'a gösteriyoruz
+Sitemap: https://ornekalanadi.com/sitemap.xml
