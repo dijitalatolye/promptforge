@@ -54,6 +54,7 @@
             max-width: 800px;
             margin: 2rem auto;
             padding: 0 1rem;
+            min-height: 60vh;
         }
 
         .tabs {
@@ -210,24 +211,81 @@
             font-size: 0.9rem;
         }
 
-        .legal-text h4 {
+        /* ALT BÖLÜM VE YASAL SAYFA STİLLERİ */
+        footer {
+            text-align: center;
+            margin-top: 5rem;
+            padding: 2rem 0;
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-links {
+            margin-bottom: 1rem;
+        }
+
+        .footer-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            margin: 0 0.8rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        .legal-container {
+            max-width: 800px;
+            margin: 2rem auto 0 auto;
+            padding: 0 1rem;
+        }
+
+        .legal-content {
+            display: none;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 2rem;
+            margin-top: 1.5rem;
+            text-align: left;
+        }
+
+        .legal-content h3 {
+            color: #fff;
+            margin-top: 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .legal-content h4 {
             color: #fff;
             margin-top: 1.5rem;
             margin-bottom: 0.5rem;
         }
 
-        .legal-text p, .legal-text ul {
+        .legal-content p, .legal-content ul {
             font-size: 0.9rem;
             color: var(--text-color);
         }
 
-        footer {
-            text-align: center;
-            margin-top: 4rem;
-            padding: 1.5rem 0;
-            font-size: 0.8rem;
+        .close-legal-btn {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
             color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+        .close-legal-btn:hover {
+            color: #fff;
+            border-color: #fff;
         }
     </style>
 </head>
@@ -243,14 +301,11 @@
         Sistem kuralları gereği girilen metin meşru ve teknik sınırlar içinde olmalıdır. Lütfen uygun kelimeler kullanınız.
     </div>
 
-    <!-- Sekme Menüsü -->
+    <!-- Sekme Menüsü (Sadece Araçlar) -->
     <div class="tabs">
         <button class="tab-btn active" data-target="prompt-tab">Akıllı Komut Sihirbazı</button>
         <button class="tab-btn" data-target="markdown-tab">Dijital Notlar</button>
         <button class="tab-btn" data-target="seo-tab">SEO Robotu</button>
-        <button class="tab-btn" data-target="about-tab">Hakkımızda</button>
-        <button class="tab-btn" data-target="terms-tab">Kullanım Koşulları</button>
-        <button class="tab-btn" data-target="privacy-tab">Gizlilik Politikası</button>
     </div>
 
     <!-- 1. ARAÇ: PROMPT SİHİRBAZI -->
@@ -335,48 +390,53 @@
             <pre id="seo-output"></pre>
         </div>
     </div>
+</div>
 
-    <!-- YASAL SAYFA 1: HAKKIMIZDA -->
-    <div id="about-tab" class="tool-content legal-text">
+<!-- DİNAMİK YASAL SAYFA PANELLERİ (FOOTER ÜSTÜ) -->
+<div class="legal-container">
+    <!-- HAKKIMIZDA -->
+    <div id="about-legal" class="legal-content">
+        <button class="close-legal-btn" onclick="closeLegal()">Kapat ✕</button>
         <h3>Hakkımızda</h3>
         <p>PromptForge, modern dijital dünyada teknik üretkenliği, yazılım süreçlerini ve bilgi yönetimini optimize etmek amacıyla kurulmuş bağımsız bir mühendislik ve içerik platformudur.</p>
         <p>Vizyonumuz; yazılımcıların, akademisyenlerin, öğrencilerin ve dijital bilgi tabanı kullanıcılarının (Obsidian, Notion vb.) günlük teknik iş akışlarını daha düzenli, standartlara uygun ve verimli bir hale getirmektir. Platformumuz bünyesinde sunulan tüm otomasyon araçları tamamen tarayıcı tabanlı çalışmakta olup, kullanıcı gizliliğini en üst seviyede korumayı ilke edinmiştir.</p>
         <p>Sitemizde yer alan tüm sistemler meşru, ahlaki ve teknik sınırlar gözetilerek yapılandırılmıştır. Kullanıcılarımızın dijital dünyadaki bağımsız altyapılarını güçlendirmek için yenilikçi çözümler sunmaya devam ediyoruz.</p>
     </div>
 
-    <!-- YASAL SAYFA 2: KULLANIM KOŞULLARI -->
-    <div id="terms-tab" class="tool-content legal-text">
+    <!-- KULLANIM KOŞULLARI -->
+    <div id="terms-legal" class="legal-content">
+        <button class="close-legal-btn" onclick="closeLegal()">Kapat ✕</button>
         <h3>Kullanım Koşulları</h3>
         <p>PromptForge web sitesine erişerek ve buradaki dijital araçları kullanarak aşağıdaki şartları kabul etmiş sayılırsınız:</p>
-        
         <h4>1. Hizmet Kullanımı</h4>
         <p>Sitede sunulan Akıllı Komut Sihirbazı, Markdown Dönüştürücü ve SEO Robotu yalnızca yasal, teknik, akademik ve iş geliştirme amaçlarıyla kullanılabilir. Sistemlerimizin genel ahlaka, toplumsal değerlere ve yasalara aykırı çıktılar üretmek amacıyla kötüye kullanılması yasaktır.</p>
-        
         <h4>2. Sorumluluk Sınırları</h4>
         <p>PromptForge, yapay zeka modellerine yönelik komut yapıları ve teknik şablonlar sunan yardımcı bir platformdur. Üretilen içeriklerin nihai doğruluğu, yazılım sistemlerindeki performansı veya arama motorlarındaki kesin başarısı konusunda garanti verilmez. Araçların kullanımından doğabilecek teknik optimizasyon süreçleri tamamen kullanıcının sorumluluğundadır.</p>
-        
         <h4>3. Fikri Mülkiyet</h4>
         <p>Sitenin tasarımı, kaynak kodları ve altyapısı PromptForge'a aittir. Kullanıcıların araçları kullanarak elde ettiği teknik metinler, şablonlar ve kod blokları üzerindeki tasarruf yetkisi tamamen kullanıcıya aittir ve ticari veya kişisel amaçlarla serbestçe kullanılabilir.</p>
     </div>
 
-    <!-- YASAL SAYFA 3: GİZLİLİK POLİTİKASI -->
-    <div id="privacy-tab" class="tool-content legal-text">
+    <!-- GİZLİLİK POLİTİKASI -->
+    <div id="privacy-legal" class="legal-content">
+        <button class="close-legal-btn" onclick="closeLegal()">Kapat ✕</button>
         <h3>Gizlilik Politikası</h3>
         <p>Kullanıcılarımızın gizliliği ve veri güvenliği PromptForge için en yüksek önceliktir. Bu doğrultuda gizlilik ilkelerimiz aşağıda açıklanmıştır:</p>
-        
         <h4>1. Veri Depolama ve Sunucu Güvenliği</h4>
-        <p>Sitemizde yer alan araçlara (Prompt Sihirbazı, Not Dönüştürücü, SEO Robotu) girdiğiniz hiçbir veri, metin veya teknik kod uzak sunucularımıza <strong>kaydedilmez ve depolanmaz</strong>. Tüm işlemler tamamen sizin tarayıcınızda (client-side) yerel olarak işlenir ve tarayıcı kapatıldığı an kaybolur.</p>
-        
+        <p>Sitemizde yer alan araçlara girdiğiniz hiçbir veri, metin veya teknik kod uzak sunucularımıza <strong>kaydedilmez ve depolanmaz</strong>. Tüm işlemler tamamen sizin tarayıcınızda (client-side) yerel olarak işlenir ve tarayıcı kapatıldığı an kaybolur.</p>
         <h4>2. Üçüncü Taraf Reklam ve Çerez Politikası</h4>
-        <p>PromptForge, platformun bağımsızlığını ve sürdürülebilirliğini sağlamak amacıyla Google AdSense reklam sistemini kullanmaktadır. Google dahil üçüncü taraf satıcılar, sitemizi ziyaret eden kullanıcılara önceki ziyaretlerine dayalı olarak reklam sunmak amacıyla çerezleri (cookies) kullanabilir. Kullanıcılar, Google'ın Reklam Ayarları sayfasına giderek kişiselleştirilmiş reklamcılığı devre dışı bırakabilirler.</p>
-        
-        <h4>3. İletişim ve Haklar</h4>
+        <p>PromptForge, platformun bağımsızlığını ve sürdürülebilirliğini sağlamak amacıyla Google AdSense reklam sistemini kullanmaktadır. Google dahil üçüncü taraf satıcılar, sitemizi ziyaret eden kullanıcılara önceki ziyaretlerine dayalı olarak reklam sunmak amacıyla çerezleri kullanabilir. Kullanıcılar, Google'ın Reklam Ayarları sayfasına giderek kişiselleştirilmiş reklamcılığı devre dışı olabilirler.</p>
+        <h4>3. İletişim Güvenliği</h4>
         <p>Sitemiz üzerinden bizimle paylaştığınız herhangi bir geri bildirim veya teknik soru olması durumunda, bilgileriniz kesinlikle üçüncü şahıslarla paylaşılmamakta ve ticari amaçlarla işlenmemektedir.</p>
     </div>
-
 </div>
 
+<!-- GELİŞMİŞ FOOTER BÖLÜMÜ -->
 <footer>
+    <div class="footer-links">
+        <button class="footer-link" onclick="showLegal('about-legal')">Hakkımızda</button> |
+        <button class="footer-link" onclick="showLegal('terms-legal')">Kullanım Koşulları</button> |
+        <button class="footer-link" onclick="showLegal('privacy-legal')">Gizlilik Politikası</button>
+    </div>
     <p>&copy; 2026 PromptForge. Tüm Hakları Saklıdır. Güvenli, Bağımsız ve Teknik Dijital Çözümler.</p>
 </footer>
 
@@ -420,6 +480,7 @@
         });
     }
 
+    // Üst Sekmeler Araç Geçişleri
     document.querySelectorAll('.tab-btn').forEach(button => {
         button.addEventListener('click', function() {
             const target = this.getAttribute('data-target');
@@ -427,8 +488,21 @@
             document.querySelectorAll('.tool-content').forEach(content => content.classList.remove('active'));
             this.classList.add('active');
             document.getElementById(target).classList.add('active');
+            closeLegal(); // Araç değiştiğinde alttaki yasal metni kapatır
         });
     });
+
+    // Alt Yasal Metin Gösterme/Kapatma Fonksiyonları
+    function showLegal(targetId) {
+        document.querySelectorAll('.legal-content').forEach(content => content.style.display = 'none');
+        const target = document.getElementById(targetId);
+        target.style.display = 'block';
+        target.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function closeLegal() {
+        document.querySelectorAll('.legal-content').forEach(content => content.style.display = 'none');
+    }
 
     // 1. Parametrik Prompt Sihirbazı
     document.getElementById('btn-prompt').addEventListener('click', function() {
