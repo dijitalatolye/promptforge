@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemizin haritasını Google'a gösteriyoruz
-Sitemap: https://ornekalanadi.com/sitemap.xml
+Sitemap: https://forgeprompt.net/sitemap.xml
