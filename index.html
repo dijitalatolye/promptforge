@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PromptForge - Dijital Üretkenlik ve Teknik Metin Araçları</title>
+    <title>PromptForge - Dijital Üretkenlik, Teknik Metin ve Bilgi Yönetim Araçları</title>
     <style>
         :root {
             --bg-color: #0d1117;
@@ -62,6 +62,7 @@
             border-bottom: 1px solid var(--border-color);
             margin-bottom: 2rem;
             overflow-x: auto;
+            padding-bottom: 5px;
         }
 
         .tab-btn {
@@ -100,7 +101,7 @@
 
         .grid-2 {
             display: grid;
-            grid-template-columns: 1xl 1xl;
+            grid-template-columns: 1fr;
             gap: 1rem;
         }
         @media(min-width: 600px) {
@@ -209,6 +210,17 @@
             font-size: 0.9rem;
         }
 
+        .legal-text h4 {
+            color: #fff;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .legal-text p, .legal-text ul {
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
         footer {
             text-align: center;
             margin-top: 4rem;
@@ -231,12 +243,17 @@
         Sistem kuralları gereği girilen metin meşru ve teknik sınırlar içinde olmalıdır. Lütfen uygun kelimeler kullanınız.
     </div>
 
+    <!-- Sekme Menüsü -->
     <div class="tabs">
         <button class="tab-btn active" data-target="prompt-tab">Akıllı Komut Sihirbazı</button>
-        <button class="tab-btn" data-target="markdown-tab">Dijital Not & Markdown Dönüştürücü</button>
-        <button class="tab-btn" data-target="seo-tab">Teknik SEO & Başlık Robotu</button>
+        <button class="tab-btn" data-target="markdown-tab">Dijital Notlar</button>
+        <button class="tab-btn" data-target="seo-tab">SEO Robotu</button>
+        <button class="tab-btn" data-target="about-tab">Hakkımızda</button>
+        <button class="tab-btn" data-target="terms-tab">Kullanım Koşulları</button>
+        <button class="tab-btn" data-target="privacy-tab">Gizlilik Politikası</button>
     </div>
 
+    <!-- 1. ARAÇ: PROMPT SİHİRBAZI -->
     <div id="prompt-tab" class="tool-content active">
         <h3>Akıllı Komut Sihirbazı</h3>
         <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -0.5rem;">Yapay zeka modeline özel mimari ve parametrik komut yapıları geliştirin.</p>
@@ -277,6 +294,7 @@
         </div>
     </div>
 
+    <!-- 2. ARAÇ: MARKDOWN DÖNÜŞTÜRÜCÜ -->
     <div id="markdown-tab" class="tool-content">
         <h3>Dijital Not & Markdown Dönüştürücü</h3>
         <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -0.5rem;">Metinleri otomatik etiket, frontmatter ve kod bloğu korumasıyla Obsidian formatına dönüştürün.</p>
@@ -297,6 +315,7 @@
         </div>
     </div>
 
+    <!-- 3. ARAÇ: SEO ROBOTU -->
     <div id="seo-tab" class="tool-content">
         <h3>Teknik SEO & Başlık Robotu</h3>
         <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -0.5rem;">Arama motorları için başlık paketleri, URL sülükleri ve JSON-LD Yapısal Veri şablonu oluşturun.</p>
@@ -316,6 +335,45 @@
             <pre id="seo-output"></pre>
         </div>
     </div>
+
+    <!-- YASAL SAYFA 1: HAKKIMIZDA -->
+    <div id="about-tab" class="tool-content legal-text">
+        <h3>Hakkımızda</h3>
+        <p>PromptForge, modern dijital dünyada teknik üretkenliği, yazılım süreçlerini ve bilgi yönetimini optimize etmek amacıyla kurulmuş bağımsız bir mühendislik ve içerik platformudur.</p>
+        <p>Vizyonumuz; yazılımcıların, akademisyenlerin, öğrencilerin ve dijital bilgi tabanı kullanıcılarının (Obsidian, Notion vb.) günlük teknik iş akışlarını daha düzenli, standartlara uygun ve verimli bir hale getirmektir. Platformumuz bünyesinde sunulan tüm otomasyon araçları tamamen tarayıcı tabanlı çalışmakta olup, kullanıcı gizliliğini en üst seviyede korumayı ilke edinmiştir.</p>
+        <p>Sitemizde yer alan tüm sistemler meşru, ahlaki ve teknik sınırlar gözetilerek yapılandırılmıştır. Kullanıcılarımızın dijital dünyadaki bağımsız altyapılarını güçlendirmek için yenilikçi çözümler sunmaya devam ediyoruz.</p>
+    </div>
+
+    <!-- YASAL SAYFA 2: KULLANIM KOŞULLARI -->
+    <div id="terms-tab" class="tool-content legal-text">
+        <h3>Kullanım Koşulları</h3>
+        <p>PromptForge web sitesine erişerek ve buradaki dijital araçları kullanarak aşağıdaki şartları kabul etmiş sayılırsınız:</p>
+        
+        <h4>1. Hizmet Kullanımı</h4>
+        <p>Sitede sunulan Akıllı Komut Sihirbazı, Markdown Dönüştürücü ve SEO Robotu yalnızca yasal, teknik, akademik ve iş geliştirme amaçlarıyla kullanılabilir. Sistemlerimizin genel ahlaka, toplumsal değerlere ve yasalara aykırı çıktılar üretmek amacıyla kötüye kullanılması yasaktır.</p>
+        
+        <h4>2. Sorumluluk Sınırları</h4>
+        <p>PromptForge, yapay zeka modellerine yönelik komut yapıları ve teknik şablonlar sunan yardımcı bir platformdur. Üretilen içeriklerin nihai doğruluğu, yazılım sistemlerindeki performansı veya arama motorlarındaki kesin başarısı konusunda garanti verilmez. Araçların kullanımından doğabilecek teknik optimizasyon süreçleri tamamen kullanıcının sorumluluğundadır.</p>
+        
+        <h4>3. Fikri Mülkiyet</h4>
+        <p>Sitenin tasarımı, kaynak kodları ve altyapısı PromptForge'a aittir. Kullanıcıların araçları kullanarak elde ettiği teknik metinler, şablonlar ve kod blokları üzerindeki tasarruf yetkisi tamamen kullanıcıya aittir ve ticari veya kişisel amaçlarla serbestçe kullanılabilir.</p>
+    </div>
+
+    <!-- YASAL SAYFA 3: GİZLİLİK POLİTİKASI -->
+    <div id="privacy-tab" class="tool-content legal-text">
+        <h3>Gizlilik Politikası</h3>
+        <p>Kullanıcılarımızın gizliliği ve veri güvenliği PromptForge için en yüksek önceliktir. Bu doğrultuda gizlilik ilkelerimiz aşağıda açıklanmıştır:</p>
+        
+        <h4>1. Veri Depolama ve Sunucu Güvenliği</h4>
+        <p>Sitemizde yer alan araçlara (Prompt Sihirbazı, Not Dönüştürücü, SEO Robotu) girdiğiniz hiçbir veri, metin veya teknik kod uzak sunucularımıza <strong>kaydedilmez ve depolanmaz</strong>. Tüm işlemler tamamen sizin tarayıcınızda (client-side) yerel olarak işlenir ve tarayıcı kapatıldığı an kaybolur.</p>
+        
+        <h4>2. Üçüncü Taraf Reklam ve Çerez Politikası</h4>
+        <p>PromptForge, platformun bağımsızlığını ve sürdürülebilirliğini sağlamak amacıyla Google AdSense reklam sistemini kullanmaktadır. Google dahil üçüncü taraf satıcılar, sitemizi ziyaret eden kullanıcılara önceki ziyaretlerine dayalı olarak reklam sunmak amacıyla çerezleri (cookies) kullanabilir. Kullanıcılar, Google'ın Reklam Ayarları sayfasına giderek kişiselleştirilmiş reklamcılığı devre dışı bırakabilirler.</p>
+        
+        <h4>3. İletişim ve Haklar</h4>
+        <p>Sitemiz üzerinden bizimle paylaştığınız herhangi bir geri bildirim veya teknik soru olması durumunda, bilgileriniz kesinlikle üçüncü şahıslarla paylaşılmamakta ve ticari amaçlarla işlenmemektedir.</p>
+    </div>
+
 </div>
 
 <footer>
@@ -417,7 +475,6 @@
         let formattedLines = lines.map((line, index) => {
             let trimmed = line.trim();
             
-            // Basit kod satırı tespiti
             if ((trimmed.startsWith('function ') || trimmed.startsWith('import ') || trimmed.startsWith('const ') || trimmed.startsWith('def ')) && !inCodeBlock) {
                 inCodeBlock = true;
                 return `\n\`\`\`\n${line}`;
@@ -434,7 +491,7 @@
             return line;
         });
 
-        let output = `---\ntype: technical_node\ntags:\n  - source/knowledge\n  - structure/markdown\ncreated_at: 2026-06-13\nstatus: integrated\n---\n\n`;
+        let output = `---\ntype: technical_node\ntags:\n  - source/knowledge\n  - structure/markdown\ncreated_at: 2026-06-14\nstatus: integrated\n---\n\n`;
         output += `%% Generated via PromptForge Parsing Engine %%\n\n`;
         output += formattedLines.join('\n');
         if(inCodeBlock) output += `\n\`\`\``;
