@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teknik Dökümantasyon Standartları: Neden Markdown? - PromptForge</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-color: #c9d1d9;
+            --text-muted: #8b949e;
+            --primary-color: #2ea44f;
+            --primary-hover: #2c974b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 2rem 1.5rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        header h1 a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        header h1 span {
+            color: var(--primary-color);
+        }
+
+        .tabs-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .tabs-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .tabs-nav a:hover {
+            color: var(--text-color);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .post-content h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .post-content p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .post-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .post-content li {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><a href="/">Prompt<span>Forge</span></a></h1>
+        <div class="tabs-nav">
+            <a href="/">Araçlar</a>
+            <a href="/blog.html">Blog</a>
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <div class="post-meta">14 Haziran 2026 • Teknik Metin Analizi</div>
+            <h1 class="post-title">Teknik Dökümantasyon Standartları: Neden Markdown?</h1>
+            
+            <div class="post-content">
+                <p>Bir projenin, yazılımın veya iş akışının sürdürülebilirliği, onun ne kadar iyi belgelendiğiyle doğrudan ilişkilidir. Geleneksel kelime işlemci programları karmaşık arayüzleri ve ağır dosya yapılarıyla çoğu zaman süreci yavaşlatır. İşte bu noktada, teknik dökümantasyon dünyasını kökten değiştiren minimalist bir kahraman öne çıkıyor: Markdown.</p>
+
+                <h2>Hafif Metin İşaretleme Dili (Markdown) Nedir?</h2>
+                <p>Markdown, düz metin editörleri kullanarak kolayca biçimlendirilmiş metinler yazmanızı sağlayan bir işaretleme dilidir. Karmaşık kod blokları veya pencereler arasında kaybolmadan, sadece klavyenizdeki belirli sembolleri kullanarak kalın yazılar, listeler, başlıklar ve tablolar oluşturabilirsiniz. Bu sadelik, yazarın biçimlendirmeye değil, tamamen içeriğin özüne ve doğruluğuna odaklanmasını sağlar.</p>
+
+                <h2>Teknik Projelerde Sağladığı Büyük Avantajlar</h2>
+                <p>Teknik metin yönetiminde Markdown formatının standart hale gelmesinin arkasında çok güçlü pratik sebepler yatmaktadır. Bu avantajların başında taşınabilirlik ve evrensellik gelir. Markdown dosyaları düz metin (.md) tabanlı olduğu için işletim sistemi veya kullanılan program ne olursa olsun her yerde aynı kusursuzlukta okunabilir ve düzenlenebilir.</p>
+
+                <h2>Versiyon Kontrolü ile Kusursuz Uyum</h2>
+                <p>Özellikle GitHub gibi platformlarda yürütülen projelerde, dökümanlardaki değişikliklerin satır satır takip edilmesi gerekir. Ağır ve binary formatlı dökümanlar versiyon kontrol sistemlerinde izlenemezken, Markdown formatındaki metinler düz yapıları sayesinde yapılan her revizyonu geçmişe dönük olarak şeffaf bir şekilde listelemenize imkan tanır. Bu da ekip çalışmalarında bilgi kaybını tamamen engeller.</p>
+
+                <ul>
+                    <li><strong>Hızlı Yazım:</strong> Ellerinizi klavyeden kaldırmadan, fareye ihtiyaç duymadan tüm hiyerarşiyi kurun.</li>
+                    <li><strong>Geleceğe Yatırım:</strong> 20 yıl sonra bile hiçbir lisansa ihtiyaç duymadan açılabilecek dökümanlar saklayın.</li>
+                    <li><strong>Gelişmiş Entegrasyon:</strong> Kod bloklarını, teknik analiz çıktılarını ve parametrik verileri şık bir şekilde listeleyin.</li>
+                </ul>
+
+                <p>Sözün özü, profesyonel standartlarda bir dijital arşiv ve dökümantasyon kültürü oluşturmak istiyorsanız, Markdown yapısını iş akışlarınıza entegre etmek en kritik adımdır. Sitemizde yer alan metin dönüştürücü ve optimize edici modüller de bu hafif işaretleme dilinin sunduğu esneklikten ilham alarak tasarlanmıştır.</p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PromptForge. Tüm hakları saklıdır.</p>
+    </footer>
+
+</body>
+</html>
