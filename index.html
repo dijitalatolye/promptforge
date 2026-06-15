@@ -622,26 +622,7 @@
     document.getElementById('copy-markdown').addEventListener('click', () => copyToClipboard('md-output', 'copy-markdown'));
     document.getElementById('copy-seo').addEventListener('click', () => copyToClipboard('seo-output', 'copy-seo'));
 
-    document.addEventListener("DOMContentLoaded", function () {
-    // Eğer kullanıcı geri tuşuyla veya doğrudan ana sayfaya gelmişse
-    // ve aktif olarak seçili bir sekme içeriği görünmüyorsa
-    const activeTab = document.querySelector(".tab-btn.active");
     
-    if (activeTab) {
-        const targetId = activeTab.getAttribute("data-target");
-        const targetContent = document.getElementById(targetId);
-        
-        // Hedef içerik alanını görünür yap, diğerlerini gizle
-        if (targetContent) {
-            // Tüm sekme içeriklerini gizle (sizin kodunuzdaki sınıf ismine göre, örn: .tab-content)
-            document.querySelectorAll(".tab-content").forEach(content => {
-                content.style.display = "none";
-            });
-            // Sadece aktif olan ilk sekmenin içeriğini göster
-            targetContent.style.display = "block"; // veya CSS'inize göre "flex" / "grid"
-        }
-    }
-});
 </script>
 
 </body>
