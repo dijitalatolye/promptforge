@@ -313,13 +313,12 @@
     </div>
 
     <!-- Sekme Menüsü (Sadece Araçlar) -->
-   <div class="tabs">
-    <!-- Adreslerin sonuna ?v=1 ekleyerek tarayıcının sayfayı sıfırdan canlı yüklemesini sağlıyoruz -->
-    <a href="/index.html?v=1" class="tab-btn">Akıllı Komut Sihirbazı</a>
-    <a href="/index.html?v=1" class="tab-btn">Dijital Notlar</a>
-    <a href="/index.html?v=1" class="tab-btn">SEO Robotu</a>
-    <a href="/blog.html" class="tab-btn active">Blog</a>
-</div>
+  <div class="tabs">
+        <button class="tab-btn active" data-target="prompt-tab">Akıllı Komut Sihirbazı</button>
+        <button class="tab-btn" data-target="markdown-tab">Dijital Notlar</button>
+        <button class="tab-btn" data-target="seo-tab">SEO Robotu</button>
+        <a href="/blog.html" class="tab-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Blog</a>
+    </div>
 
     <!-- 1. ARAÇ: PROMPT SİHİRBAZI -->
     <div id="prompt-tab" class="tool-content active">
