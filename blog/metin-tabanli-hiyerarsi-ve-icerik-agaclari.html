@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilgi Mimarisinde Metin Tabanlı Hiyerarşi ve İçerik Ağaçları - PromptForge</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-color: #c9d1d9;
+            --text-muted: #8b949e;
+            --primary-color: #2ea44f;
+            --primary-hover: #2c974b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 2rem 1.5rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        header h1 a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        header h1 span {
+            color: var(--primary-color);
+        }
+
+        .tabs-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .tabs-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .tabs-nav a:hover {
+            color: var(--text-color);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .post-content h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .post-content p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .post-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .post-content li {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><a href="/">Prompt<span>Forge</span></a></h1>
+        <div class="tabs-nav">
+            <a href="/">Araçlar</a>
+            <a href="/blog.html">Blog</a>
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <div class="post-meta">15 Haziran 2026 • Bilgi Yönetimi</div>
+            <h1 class="post-title">Bilgi Mimarisinde Metin Tabanlı Hiyerarşi ve İçerik Ağaçları</h1>
+            
+            <div class="post-content">
+                <p>Büyüyen projeler, teknik dökümanlar ve genişleyen bilgi havuzları zamanla takibi imkansız bir veri yığınına dönüşebilir. Bilginin hacmi arttıkça, aranan bir veriye ulaşma süresi de doğru orantılı olarak uzar. Dijital yönetim süreçlerinde bu tıkanıklığı önlemenin ve zihinsel yükü azaltmanın en kararlı yolu, mantıksal bir metin tabanlı hiyerarşi ve içerik ağacı yapısı kurmaktır.</p>
+
+                <h2>Metin Tabanlı Hiyerarşi Nedir?</h2>
+                <p>Metin tabanlı hiyerarşi, bilgiyi genel kavramlardan özel detaylara doğru mantıksal bir sıra dahilinde dizme disiplinidir. Döküman tasarımında kullanılan başlık seviyeleri (H1, H2, H3) ve girintili listeler, karmaşık bir teknik konunun okuyucu veya arama motoru botları tarafından saniyeler içinde çözümlenmesini sağlar. Doğru hiyerarşi, karmaşık süreçleri basitleştirir.</p>
+
+                <h2>İçerik Ağaçlarının Mantığı ve Yapısı</h2>
+                <p>İçerik ağaçları (content trees), bilgilerin bir ağacın dalları gibi birbirine bağlı ancak bağımsız modüller halinde yapılandırılmasıdır. Bir ana gövdeden ayrılan alt kategoriler, teknik projelerin dökümantasyon adımlarını temsil eder. Bu yöntem sayesinde, aradığınız spesifik bir parametre veya yönerge sistem içinde asla kaybolmaz ve dökümanın bütünlüğü korunur.</p>
+
+                <h2>Verimli Bir Bilgi Ağacı Nasıl Tasarlanır?</h2>
+                <p>Sürdürülebilir bir bilgi mimarisi oluştururken derinlik dengesine dikkat edilmelidir. Klasörlerin veya alt başlıkların aşırı derinleşmesi (iç içe onlarca katman) bilgiye erişimi zorlaştırır. Bunun yerine, yatayda genişleyebilen ama dikeyde makul seviyelerde kalan esnek ve düz metin odaklı yapılar tercih edilmelidir. Bu yaklaşım, sistemin gelecekteki optimizasyon süreçlerini de kolaylaştırır.</p>
+
+                <ul>
+                    <li><strong>Mantıksal Sınıflandırma:</strong> Notlarınızı ve dökümanlarınızı işlevlerine, konularına ve kullanım sıklıklarına göre gruplayın.</li>
+                    <li><strong>Girintileme ve İşaretleme:</strong> İlişkili alt fikirleri ve teknik detayları görsel olarak ana başlıklardan ayırmak için tutarlı girintiler kullanın.</li>
+                    <li><strong>Bağlantısal Navigasyon:</strong> Hiyerarşik yapının yanında, modüller arasında çapraz referanslar vererek bilgi ağını güçlendirin.</li>
+                </ul>
+
+                <p>Kısacası, dijital platformlarda ve profesyonel projelerde kalıcı bir başarı elde etmek, bilginin yapısal düzeniyle doğrudan ilişkilidir. Sitemizde yer alan dijital not optimizasyon araçları, dökümanlarınızı en doğru hiyerarşik standartlara getirmek ve bilgi ağaçlarınızı daha verimli yönetmeniz için tasarlanmıştır.</p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PromptForge. Tüm hakları saklıdır.</p>
+    </footer>
+
+</body>
+</html>
