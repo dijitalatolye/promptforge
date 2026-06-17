@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modüler Bilgi Blokları ve Katmanlı Yapı Tasarımı - PromptForge</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-color: #c9d1d9;
+            --text-muted: #8b949e;
+            --primary-color: #2ea44f;
+            --primary-hover: #2c974b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 2rem 1.5rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        header h1 a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        header h1 span {
+            color: var(--primary-color);
+        }
+
+        .tabs-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .tabs-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .tabs-nav a:hover {
+            color: var(--text-color);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .post-content h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .post-content p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .post-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .post-content li {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><a href="/">Prompt<span>Forge</span></a></h1>
+        <div class="tabs-nav">
+            <a href="/">Araçlar</a>
+            <a href="/blog.html">Blog</a>
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <div class="post-meta">18 Haziran 2026 • Bilgi Yönetimi</div>
+            <h1 class="post-title">Modüler Bilgi Blokları ve Katmanlı Yapı Tasarımı</h1>
+            
+            <div class="post-content">
+                <p>Büyük hacimli teknik projelerde veya genişleyen veri havuzlarında karşılaşılan en büyük zorluklardan biri, dökümanların zamanla devasa ve yönetilemez yığınlara dönüşmesidir. Bilgiyi tek bir doğrusal düzlemde sunmaya çalışmak hem güncellemeleri zorlaştırır hem de okuyucunun aradığı spesifik veriyi bulmasını engeller. Çözüm, bilgiyi bağımsız katmanlara ayırarak modüler bloklar halinde inşa etmektir.</p>
+
+                <h2>Katmanlı Yapı Tasarımı Nedir?</h2>
+                <p>Katmanlı yapı tasarımı, teknik bir konunun veya sistem mimarisinin temel prensiplerden başlayarak en detaylı parametrelere kadar seviye seviye ayrılmasıdır. İlk katmanda kullanıcıya konunun özeti ve genel amacı sunulurken, alt katmanlarda derinlemesine analizler, teknik dökümanlar ve yapılandırma yönergeleri yer alır. Bu yaklaşım, karmaşık verilerin zihinsel olarak çok daha rahat algılanmasını sağlar.</p>
+
+                <h2>Modüler Bilgi Bloklarının Esnekliği</h2>
+                <p>Bilgiyi bağımsız modüller halinde saklamak, dökümantasyon yönetiminde benzersiz bir esneklik kazandırır. Her bir bilgi bloğu kendi içinde tam, doğrulanabilir ve bağımsız bir yapıya sahip olmalıdır. Bu sayede, sistemin bir bölümünde güncelleme yapılması gerektiğinde dökümanın tamamını revize etmek yerine, sadece ilgili bilgi bloğunu güncellemek yeterli olur.</p>
+
+                <h2>Dijital Platformlarda Veri Tutarlılığı</h2>
+                <p>Web tabanlı bilgi yönetim sistemlerinde modüler katmanlar kullanmak, arama motoru botlarının site yapısını indeksleme kalitesini de doğrudan artırır. Mantıksal sınırları belirlenmiş, hiyerarşik olarak doğru katmanlandırılmış dökümanlar semantik web standartlarına tam uyum sağlar. Bu sistemli yaklaşım, platformun teknik derinliğini ve arama sonuçlarındaki performansını kalıcı olarak pekiştirir.</p>
+
+                <ul>
+                    <li><strong>Bilişsel Kolaylık:</strong> Bilgiyi aşamalı katmanlar halinde sunarak okuyucunun odaklanma süresini ve anlama oranını artırın.</li>
+                    <li><strong>Operasyonel Hız:</strong> Teknik dökümanları esnek ve modüler bloklara ayırarak bakım ve güncelleme süreçlerini kısaltın.</li>
+                    <li><strong>Yapısal Mimari:</strong> Sistem verilerini karmaşadan uzak, birbirini destekleyen tutarlı bir hiyerarşik düzende organize edin.</li>
+                </ul>
+
+                <p>Özetlemek gerekirse, dijital dünyada sürdürülebilir bilgi sistemleri kurmak ancak esnek bir mimariyle mümkündür. Web sitemizde geliştirdiğimiz yapılandırılmış analiz rehberleri ve akıllı metin modülleri, bu katmanlı tasarım mantığını en optimize şekilde hayata geçirmek için tasarlanmıştır.</p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PromptForge. Tüm hakları saklıdır.</p>
+    </footer>
+
+</body>
+</html>
