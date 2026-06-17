@@ -628,5 +628,18 @@
     
 </script>
 
+<script>
+// Menü butonlarına tıklandığında kilitlenen CSS stilini otomatik temizleyen kurtarıcı kod
+document.querySelectorAll('.tab-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const firstTab = document.getElementById('prompt-tab');
+        if (firstTab) {
+            // İlk araca verdiğimiz sabit görünürlük stilini kaldırır, böylece diğer sekmeler açılabilir
+            firstTab.style.display = '';
+        }
+    });
+});
+</script>
+    
 </body>
 </html>
