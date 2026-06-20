@@ -4,166 +4,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dijital Bilgi Yönetimi: Markdown ile Yapılandırılmış Not Alma Rehberi - PromptForge</title>
-    <meta name="description" content="Kişisel bilgi yönetiminde verimliliği artıran Markdown formatı, Obsidian entegrasyonu ve dijital arşivleme teknikleri hakkında kapsamlı teknik rehber.">
     
     <!-- Tarayıcı Sekme Logosu (Favicon) -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23238636'/><text x='50' y='65' font-family='system-ui, sans-serif' font-size='50' font-weight='900' fill='%23ffffff' text-anchor='middle'>PF</text></svg>">
 
     <style>
-        /* Modern Karanlık Tema Tasarım Tokenları - Diğer Makalelerle Birebir Eşitlendi */
         :root {
             --bg-color: #0d1117;
-            --container-bg: #161b22;
-            --border-color: #21262d;
-            --text-main: #c9d1d9;
-            --text-bright: #ffffff;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-color: #c9d1d9;
             --text-muted: #8b949e;
-            --accent-green: #238636;
-            --accent-green-hover: #2ea043;
-            --code-bg: #0d1117;
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+            --primary-color: #2ea44f;
+            --primary-hover: #2c974b;
         }
 
         body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
             line-height: 1.8;
-            -webkit-font-smoothing: antialiased;
         }
 
-        /* Navigasyon Barı */
-        .navbar {
-            background-color: var(--container-bg);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav-container {
-            max-width: 1000px;
+        header {
+            text-align: center;
+            padding: 3rem 2rem 1.5rem 2rem;
+            max-width: 800px;
             margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .nav-logo {
-            display: inline-flex;
-            align-items: center;
-            color: var(--text-bright);
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
             font-weight: 700;
-            font-size: 1.3rem;
+        }
+
+        header h1 a {
+            color: #fff;
             text-decoration: none;
-            letter-spacing: -0.5px;
         }
 
-        .nav-logo span {
-            background-color: var(--accent-green);
-            color: var(--text-bright);
-            padding: 2px 8px;
-            border-radius: 6px;
-            margin-left: 5px;
-            font-weight: 800;
-            box-shadow: 0 2px 6px rgba(35, 134, 54, 0.3);
+        header h1 span {
+            color: var(--primary-color);
         }
 
-        .back-link {
+        .tabs-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .tabs-nav a {
             color: var(--text-muted);
             text-decoration: none;
+            padding: 0.5rem 1rem;
             font-weight: 500;
             font-size: 0.95rem;
-            transition: color 0.2s ease;
+            transition: color 0.2s;
         }
 
-        .back-link:hover {
-            color: var(--text-bright);
+        .tabs-nav a:hover {
+            color: var(--text-color);
         }
 
-        /* İçerik Düzeni */
-        .content-wrapper {
+        main {
             max-width: 800px;
             margin: 3rem auto;
-            padding: 0 1.5rem;
-        }
-
-        .post-header {
-            margin-bottom: 2.5rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1.5rem;
-        }
-
-        .post-title {
-            color: var(--text-bright);
-            font-size: 2.2rem;
-            font-weight: 800;
-            line-height: 1.3;
-            margin-bottom: 0.8rem;
-            letter-spacing: -0.5px;
+            padding: 0 2rem;
         }
 
         .post-meta {
-            color: var(--text-muted);
             font-size: 0.9rem;
-            display: flex;
-            gap: 10px;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            text-align: center;
         }
 
-        .post-category {
-            background-color: rgba(35, 134, 54, 0.15);
-            color: #58a6ff;
-            padding: 1px 8px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        /* Makale Gövdesi */
-        .post-content p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .post-content strong {
-            color: var(--text-bright);
+        .post-title {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #fff;
         }
 
         .post-content h2 {
-            color: var(--text-bright);
-            font-size: 1.6rem;
-            font-weight: 700;
+            color: #fff;
+            font-size: 1.8rem;
             margin-top: 2.5rem;
             margin-bottom: 1rem;
-            border-bottom: 1px solid rgba(240, 246, 252, 0.1);
-            padding-bottom: 0.3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
         }
 
         .post-content h3 {
-            color: var(--text-bright);
-            font-size: 1.25rem;
-            font-weight: 600;
+            color: #fff;
+            font-size: 1.3rem;
             margin-top: 2rem;
             margin-bottom: 0.8rem;
         }
 
-        /* Bilgi Kutuları ve Kod Blokları */
+        .post-content p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .post-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .post-content li {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Kod ve Blok Düzenlemeleri */
         .post-content pre {
-            background-color: var(--code-bg);
+            background-color: #161b22;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.2rem;
+            border-radius: 6px;
+            padding: 1rem;
             overflow-x: auto;
             margin: 1.5rem 0;
-            font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-            font-size: 0.9rem;
         }
 
         .post-content code {
@@ -181,87 +148,53 @@
             color: #79c0ff;
         }
 
-        .post-content ul, .post-content ol {
-            margin-left: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .post-content li {
-            margin-bottom: 0.5rem;
-            font-size: 1.05rem;
-        }
-
-        /* Footer */
         footer {
             text-align: center;
-            padding: 3rem 1rem;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
+            padding: 2rem;
             margin-top: 5rem;
-            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="nav-logo">
-                Prompt<span>Forge</span>
-            </a>
-            <a href="/blog.html" class="back-link">← Blog'a Dön</a>
+    <header>
+        <h1><a href="/">Prompt<span>Forge</span></a></h1>
+        <div class="tabs-nav">
+            <a href="/">Araçlar</a>
+            <a href="/blog.html">Blog</a>
         </div>
-    </nav>
+    </header>
 
-    <main class="content-wrapper">
-        <header class="post-header">
+    <main>
+        <article>
+            <div class="post-meta">20 Haziran 2026 • Bilgi Yönetimi</div>
             <h1 class="post-title">Dijital Bilgi Yönetimi: Markdown ile Yapılandırılmış Not Alma Rehberi</h1>
-            <div class="post-meta">
-                <span>Yayınlanma Tarihi: 20 Haziran 2026</span> • 
-                <span class="post-category">Bilgi Yönetimi</span>
-            </div>
-        </header>
+            
+            <div class="post-content">
+                <p>Bilgi çağının en büyük zorluklarından biri, her gün karşılaşılan devasa veri akışını düzenli bir şekilde saklamak ve ihtiyaç duyulduğunda bu verilere hızla erişebilmektir. Geleneksel metin editörleri, zengin metin (Rich Text) biçimlendirmeleri nedeniyle dosyaları ağırlaştırmakta ve platformlar arası uyumluluk sorunlarına yol açmaktadır. <strong>Dijital bilgi yönetimi</strong> süreçlerinde kalıcı, esnek ve geleceğe yönelik sistemler kurmanın en kararlı yolu ise düz metin (Plain Text) tabanlı Markdown formatından geçmektedir.</p>
 
-        <article class="post-content">
-            <p>Bilgi çağının en büyük zorluklarından biri, her gün karşılaşılan devasa veri akışını düzenli bir şekilde saklamak ve ihtiyaç duyulduğunda bu verilere hızla erişebilmektir. Geleneksel metin editörleri, zengin metin (Rich Text) biçimlendirmeleri nedeniyle dosyaları ağırlaştırmakta ve platformlar arası uyumluluk sorunlarına yol açmaktadır. <strong>Dijital bilgi yönetimi</strong> süreçlerinde kalıcı, esnek ve geleceğe yönelik sistemler kurmanın en kararlı yolu ise düz metin (Plain Text) tabanlı Markdown formatından geçmektedir.</p>
+                <h2>Markdown Nedir ve Neden Standart Hale Geldi?</h2>
+                <p>Markdown, 2004 yılında John Gruber tarafından geliştirilen, kolay okunabilir ve kolay yazılabilir bir metin işaretleme dilidir. Herhangi bir özel editöre ihtiyaç duymadan, sadece standart bir klavye kullanarak başlıklar, listeler, kod blokları ve vurgular eklenebilmesine imkan tanır. Verilerin <code>.md</code> uzantılı dosyalarda saklanması, yazılımlardan bağımsız olarak notların 10 yıl sonra bile herhangi bir işletim sisteminde hatasız açılabilmesini güvence altına alır.</p>
 
-            <h2>Markdown Nedir ve Neden Standart Hale Geldi?</h2>
-            <p>Markdown, 2004 yılında John Gruber tarafından geliştirilen, kolay okunabilir ve kolay yazılabilir bir metin işaretleme dilidir. Herhangi bir özel editöre ihtiyaç duymadan, sadece standart bir klavye kullanarak başlıklar, listeler, kod blokları ve vurgular eklenebilmesine imkan tanır. Verilerin <code>.md</code> uzantılı dosyalarda saklanması, yazılımlardan bağımsız olarak notların 10 yıl sonra bile herhangi bir işletim sisteminde hatasız açılabilmesini güvence altına alır.</p>
+                <h2>Temel Markdown Sözdizimi (Syntax) Rehberi</h2>
+                <p>Etkili bir teknik dokümantasyon ve hiyerarşik not yapısı kurabilmek için en sık kullanılan işaretleme yöntemleri şunlardır:</p>
 
-            <h2>Temel Markdown Sözdizimi (Syntax) Rehberi</h2>
-            <p>Etkili bir teknik dokümantasyon ve hiyerarşik not yapısı kurabilmek için en sık kullanılan işaretleme yöntemleri şunlardır:</p>
-
-            <h3>1. Başlık Yapıları (Headings)</h3>
-            <p>Metin içindeki hiyerarşiyi belirlemek için kare (#) sembolü kullanılır. Kare sayısı arttıkça başlık seviyesi küçülür:</p>
-            <pre><code># Ana Başlık (H1)
+                <h3>1. Başlık Yapıları (Headings)</h3>
+                <p>Metin içindeki hiyerarşiyi belirlemek için kare (#) sembolü kullanılır. Kare sayısı arttıkça başlık seviyesi küçülür:</p>
+                <pre><code># Ana Başlık (H1)
 ## Alt Başlık (H2)
 ### Detay Başlığı (H3)</code></pre>
 
-            <h3>2. Metin Vurguları</h3>
-            <p>Kelime veya cümleleri kalın ya da eğik yapmak için yıldız (*) işareti tercih edilir:</p>
-            <ul>
-                <li><strong>Kalın Metin:</strong> <code>**kalın yazı**</code></li>
-                <li><em>Eğik Metin:</em> <code>*eğik yazı*</code></li>
-                <li><del>Üstü Çizili Metin:</del> <code>~~üstü çizili~~</code></li>
-            </ul>
+                <h3>2. Metin Vurguları</h3>
+                <p>Kelime veya cümleleri kalın ya da eğik yapmak için yıldız (*) işareti tercih edilir:</p>
+                <ul>
+                    <li><strong>Kalın Metin:</strong> <code>**kalın yazı**</code></li>
+                    <li><em>Eğik Metin:</em> <code>*eğik yazı*</code></li>
+                    <li><del>Üstü Çizili Metin:</del> <code>~~üstü çizili~~</code></li>
+                </ul>
 
-            <h3>3. Kod Blokları ve Listeler</h3>
-            <p>Yazılım geliştirenler veya teknik not tutanlar için kod bloklarını renklendirmek son derece basittir. Üçlü ters tırnak (```) işareti ile dil belirtilerek bloklar oluşturulur:</p>
-            <pre><code>const platform = "PromptForge";
-console.log(platform);</code></pre>
-
-            <h2>Kişisel Bilgi Yönetimi (PKM) ve Obsidian Entegrasyonu</h2>
-            <p>Sadece not tutmak, bilginin işlenmesi için yeterli değildir. Notların birbiriyle ilişkilendivelmesi gerekir. <strong>Obsidian</strong> ve <strong>Notion</strong> gibi modern bilgi yönetimi araçları, Markdown altyapısını kullanarak yerel cihazınızda bağlantılı bir bilgi ağı kurulmasına olanak tanır.</p>
-            <p>Obsidian sisteminde iki köşeli parantez kullanarak <code>[[Not Adı]]</code> şeklinde sayfalar arası köprüler kurulduğunda, dijital veri havuzunuzda organik bir bilgi haritası (Graph View) ortaya çıkar. This yöntemle teknik dökümanlar, iş akışları ve öğrenilen yeni konseptler birbirine bağlanarak unutulma riskinden tamamen uzaklaştırılır.</p>
-
-            <h2>Sonuç: Geleceğe Yatırım Olarak Düz Metin</h2>
-            <p>Bulut tabanlı özel formatlara bağımlı kalmak, ilgili platform kapandığında veya üyelik modelleri değiştiğinde verilerin kaybolma riskini doğurur. Markdown ile inşa edilen kişisel arşivleme ve dökümantasyon sistemleri ise tamamen açık kaynak standartlarında, hafif, taşınabilir ve taş gibi sağlam bir bilgi yönetim mimarisi sunar. Dijital üretkenliği optimize etmenin en sürdürülebilir adımı, not alma alışkanlıklarını bu yalın formata entegre etmektir.</p>
-        </article>
-    </main>
-
-    <footer>
-        &copy; 2026 PromptForge. Tüm Hakları Saklıdır.
-    </footer>
-
-</body>
-</html>
+                <h3>3. Kod Blokları ve Listeler</h3>
+                <p>Yazılım geliştirenler veya teknik not tutanlar için kod bloklarını renklendirmek son derece basittir. Üçlü ters tırnak (
