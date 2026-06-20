@@ -200,10 +200,10 @@
             <div class="post-content">
                 <p>Büyük dil modellerinin (LLM) günlük ve endüstriyel iş akışlarına entegrasyonu, basit soru-cevap mantığının çok ötesine geçmiştir. Geliştirilen sistemlerin deterministik, tekrarlanabilir ve yüksek kaliteli çıktılar üretebilmesi için komutların statik birer metin olmaktan çıkıp yazılımsal değişkenler gibi ele alınması gerekir. <strong>Parametrik sistem tasarımı</strong>, yapay zeka entegrasyonlarında sapmaları en aza indirerek en kararlı sonuçları elde etmenin metodolojik anahtarıdır.</p>
 
-                <h2>Komut Mühendisliğinde Rol Tanımlama ve Sınırlandırma</h2>
+                <h2><b>Komut Mühendisliğinde Rol Tanımlama ve Sınırlandırma</b></h2>
                 <p>Bir yapay zeka modelinden maksimum verim alabilmek, ona verilecek rolün sınırlarını kesin matematiksel ve mantıksal çerçevelerle çizmekle başlar. Modelin hangi uzmanlık alanında kalacağını, hangi veri kaynaklarını referans alacağını ve sınırların dışına çıkıldığında nasıl bir savunma mekanizması (fallback) izleyeceğini komut mimarisinde açıkça belirtmek gerekir. Bu yaklaşım, modelin tahmin dışı ("halüsinasyon") çıktılar üretmesini engeller.</p>
 
-                <h2>Sistem Parametreleri ve Dinamik Değişken Entegrasyonu</h2>
+                <h2><b>Sistem Parametreleri ve Dinamik Değişken Entegrasyonu</b></h2>
                 <p>Endüstriyel ölçekteki uygulamalarda komutlar statik şablonlar yerine, API üzerinden gelen dinamik verilerle beslenen parametrik yapılara dönüştürülür. Bir komut şablonunun yapısal olarak nasıl kurgulanması gerektiğine dair temel bir şema şu şekildedir:</p>
 
                 <pre><code>[SİSTEM ROLÜ]: Kıdemli Veri Analisti ve Yazılım Mimarı.
@@ -211,7 +211,7 @@
 [KISITLAMALAR]: Sadece girdi olarak sağlanan veri setini analiz et. Dışsal yorum ekleme.
 [ÇIKTI ŞABLONU]: JSON formatında analiz özeti döndür.</code></pre>
 
-                <h2>Çıktı Biçimlendirme Kontrolü ve JSON Yapıları</h2>
+                <h2><b>Çıktı Biçimlendirme Kontrolü ve JSON Yapıları</b></h2>
                 <p>Modellerden dönen yanıtların bir yazılım tarafından otomatik olarak işlenebilmesi için çıktıların yapılandırılmış veri formatlarında (örneğin JSON) alınması zorunludur. Komut içerisinde çıktı şemasının (schema) anahtar-değer çiftleriyle net bir şekilde tanımlanması, veri ayrıştırma (parsing) hatalarını tamamen ortadan kaldırır. Örnek bir JSON çıktı şablonu belirteci şu şekildedir:</p>
 
                 <pre><code>{
@@ -220,7 +220,7 @@
   "cozum_onerileri": ""
 }</code></pre>
 
-                <h2>Sürdürülebilir Yapay Zeka Entegrasyonlarında Altın Kurallar</h2>
+                <h2><b>Sürdürülebilir Yapay Zeka Entegrasyonlarında Altın Kurallar</b></h2>
                 <p>Projenizin kalitesini ve AdSense onay standartlarını en üst seviyede tutabilmek için komut sistemleri tasarlanırken şu teknik kriterlere dikkat edilmelidir:</p>
                 <ul>
                     <li><strong>Bağlam Sınırlandırması:</strong> Modele sadece görevi tamamlaması için gereken tıkız veri bağlamını iletin. Gereksiz veri yükü işlem maliyetini artırır ve kaliteyi düşürür.</li>
@@ -228,7 +228,7 @@
                     <li><strong>Hata Yakalama Metinleri:</strong> Beklenmeyen durumlarda modelin üreteceği standart hata mesajlarını önceden sabitleyin.</li>
                 </ul>
 
-                <h2>Sonuç: Mühendislik Disiplini Olarak Komut Tasarımı</h2>
+                <h2><b>Sonuç: Mühendislik Disiplini Olarak Komut Tasarımı</b></h2>
                 <p>Komut mühendisliği, rastgele deneme-yanılma süreçlerinden ziyade yazılım mühendisliği disipliniyle ele alınmalıdır. Parametrik, modüler ve sıkı denetimli komut mimarileri kurmak; dijital üretkenlik sistemlerinizin sürdürülebilir, güvenli ve yüksek performanslı çalışmasını sağlar. Bilgi yönetiminde kalıcı bir ekosistem kurmanın yolu, bu parametrik yapıları standartlaştırmaktan geçer.</p>
             </div>
         </article>
