@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yapay Zeka Ajanları ve Otonom İş Akışları - PromptForge</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-color: #c9d1d9;
+            --text-muted: #8b949e;
+            --primary-color: #2ea44f;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+        header {
+            text-align: center;
+            padding: 3rem 2rem 1.5rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+        }
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        header h1 a {
+            color: #fff;
+            text-decoration: none;
+        }
+        header h1 span {
+            color: var(--primary-color);
+        }
+        .tabs-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        .tabs-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+        }
+        main {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        .post-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .post-title {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #fff;
+        }
+        .post-content h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+        .post-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        .post-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        .post-content li {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><a href="/">Prompt<span>Forge</span></a></h1>
+        <div class="tabs-nav">
+            <a href="/">Araçlar</a>
+            <a href="/blog.html">Blog</a>
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <div class="post-meta">22 Haziran 2026 • Yapay Zeka Ajanları</div>
+            <h1 class="post-title">Yapay Zeka Ajanları ve Otonom İş Akışlarının Geleceği</h1>
+            
+            <div class="post-content">
+                <p>Geleneksel yapay zeka modelleri, kullanıcıdan gelen her soruya tek bir yanıt üreten "soru-cevap" mantığıyla çalışır. Ancak büyük dil modellerinin (LLM) evrimleşmesiyle birlikte, bu döngü kırılmaya başladı. Artık karşımızda sadece sorulara yanıt veren değil, kendisine verilen büyük bir hedefi gerçekleştirmek için adım adım planlama yapan ve kendi kararlarını uygulayan otonom yapay zeka ajanları (AI Agents) var.</p>
+
+                <h2>Yapay Zeka Ajanı Nedir ve Nasıl Çalışır?</h2>
+                <p>Bir yapay zeka ajanını, standart bir dil modelinden ayıran temel özellik, bir döngü (loop) içinde bağımsız olarak hareket edebilmesidir. Sistem, karmaşık bir görevi alt görevlere böler, her adımda elde ettiği sonuçları değerlendirir ve bir sonraki adımda ne yapması gerektiğine kendisi karar verir. Bu süreç genellikle şu temel bileşenlerden oluşur:</p>
+                <ul>
+                    <li><strong>Planlama (Planning):</strong> Büyük hedefleri yönetilebilir küçük parçalara ayırma ve geçmiş adımlardan ders çıkarma kabiliyeti.</li>
+                    <li><strong>Bellek Yönetimi (Memory):</strong> Kısa süreli bağlam hafızası ile uzun süreli veritabanı kayıtlarının (RAG) senkronize kullanılması.</li>
+                    <li><strong>Araç Kullanımı (Tools):</strong> Modelin sadece metin üretmekle kalmayıp, internette arama yapabilmesi, kod çalıştırabilmesi veya API'ler üzerinden harici yazılımları tetikleyebilmesi.</li>
+                </ul>
+
+                <h2>Geliştiriciler İçin Yeni İş Akışı Yaklaşımları</h2>
+                <p>Modern otomasyon sistemlerinde tek bir büyük ajandan ziyade, belirli konularda özelleşmiş çoklu ajan yapıları (Multi-Agent Systems) tercih edilmektedir. Örneğin; bir ajan sadece araştırma yaparken, diğeri bu araştırmayı rapora dönüştürür, üçüncü bir ajan ise nihai çıktının doğruluğunu denetler. Bu modüler yapı, hataları en aza indirerek sistem kararlılığını en üst düzeye çıkarır.</p>
+
+                <p>Geleceğin dijital altyapısında, bu otonom yapılar süreç yönetimini daha verimli hale getirecektir. Web sitemiz üzerinde paylaştığımız parametrik yapılar ve mühendislik çözümleri, bu yeni nesil otonom iş akışlarına entegrasyonu kolaylaştırmak üzere tasarlanmıştır.</p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PromptForge. Tüm hakları saklıdır.</p>
+    </footer>
+
+</body>
+</html>
