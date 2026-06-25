@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Zincirleme ve Mantıksal Akış Tasarımı - PromptForge</title>
+    
+    <!-- İkon Sorununu Kökten Çözen Dinamik Çözücü -->
+    <script src="/favicon-resolver.js" defer></script>
+
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-color: #c9d1d9;
+            --text-muted: #8b949e;
+            --primary-color: #2ea44f;
+            --primary-hover: #2c974b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 2rem 1.5rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        header h1 a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        header h1 span {
+            color: var(--primary-color);
+        }
+
+        .tabs-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .tabs-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .tabs-nav a:hover {
+            color: var(--text-color);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .post-content h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .post-content p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .post-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .post-content li {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        pre {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.2rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        code {
+            font-family: ui-monospace, SFMono-Regular, SF Pro TXT, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.9rem;
+            color: #ff7b72;
+        }
+
+        pre code {
+            color: var(--text-color);
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><a href="/">Prompt<span>Forge</span></a></h1>
+        <div class="tabs-nav">
+            <a href="/">Araçlar</a>
+            <a href="/blog.html">Blog</a>
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <div class="post-meta">25 Haziran 2026 • Komut Mühendisliği</div>
+            <h1 class="post-title">Prompt Zincirleme (Prompt Chaining) ve Mantıksal Akış Tasarımı</h1>
+            
+            <div class="post-content">
+                <p>Büyük dil modelleri tek bir adımda şaşırtıcı analizler gerçekleştirebilir. Ancak görev karmaşıklaştıkça, modelin aynı anda hem mantık yürütmesi, hem bilgi doğrulaması hem de belirli bir formatta çıktı üretmesi zorlaşır. Sistem tasarımlarında karşılaşılan bu bilişsel yük yığılmasını engellemek amacıyla kullanılan en etkili mühendislik yaklaşımı <strong>Prompt Zincirleme (Prompt Chaining)</strong> metodudur.</p>
+
+                <h2>Prompt Zincirleme Nedir?</h2>
+                <p>Prompt zincirleme, büyük ve karmaşık bir yapay zeka görevini birbirini takip eden daha küçük, odaklanmış ve yönetilebilir alt adımlara bölme işlemidir. Bu sistemde, bir adımın ürettiği çıktı (output), bir sonraki adımın girdisi (input) olarak işlenir. Modeli tek seferde her şeyi yapmaya zorlamak yerine, her adımda tek bir göreve odaklanması sağlanarak sistem genelindeki sapmalar minimize edilir.</p>
+
+                <h2>Neden Tek Bir Prompt Yerine Zincirleme Tasarım?</h2>
+                <p>Yapay zeka modellerinin kısıtlı bir çalışma belleği ve odaklanma kapasitesi vardır. Çok adımlı akış tasarımlarının sunduğu avantajlar şu şekildedir:</p>
+                <ul>
+                    <li><strong>Yüksek Başarı Oranı:</strong> Model her adımda sadece tek bir konuya (örneğin sadece analiz yapmaya veya sadece veriyi filtrelemeye) odaklandığı için çıktı kalitesi artar.</li>
+                    <li><strong>Hata Ayıklama Kolaylığı:</strong> Akışta bir hata oluştuğunda, hatanın hangi alt adımdan kaynaklandığını tespit etmek ve o adımı optimize etmek çok daha basittir.</li>
+                    <li><strong>Yapısal Esneklik:</strong> Adımların arasına geleneksel yazılım kodları (API çağrıları, veri tabanı sorguları, filtreleme algoritmaları) yerleştirilerek hibrit sistemler kurulabilir.</li>
+                </ul>
+
+                <h2>Mantıksal Akış Şeması Örneği</h2>
+                <p>Bir e-ticaret sitesine gelen kullanıcı şikayetini analiz edip otomatik aksiyon alan bir zincirleme tasarımı şu üç adımdan oluşabilir:</p>
+
+                <pre><code>[Adım 1: Duygu ve Kategori Analizi]
+Girdi: Kullanıcı Mesajı
+Görev: Duyguyu (Öfkeli/Nötr) ve kategoriyi (İade/Kargo) belirle.
+Çıktı: JSON formatında veri.
+
+            │
+            ▼ (Eğer Duygu = Öfkeli ise Adım 2'ye geç)
+
+[Adım 2: Çözüm Bilgisi Arama]
+Girdi: Adım 1 Çıktısı (Kategori: İade)
+Görev: Şirket dökümanlarından iade politikasını çek.
+Çıktı: İade kuralları metni.
+
+            │
+            ▼
+
+[Adım 3: Kişiselleştirilmiş Yanıt Hazırlama]
+Girdi: Adım 1 Çıktısı + Adım 2 Çıktısı
+Görev: Kullanıcıya yatıştırıcı ve iade politikasını açıklayan bir e-posta yaz.
+Çıktı: Nihai e-posta taslağı.</code></pre>
+
+                <h2>Sistem Kararlılığı İçin Altın Kurallar</h2>
+                <p>Prompt zincirleme mimarilerini hayata geçirirken dikkat edilmesi gereken kritik tasarım kriterleri şunlardır:</p>
+                <ul>
+                    <li><strong>Girdi-Çıktı Tiplerini Sabitlemek:</strong> Zincirdeki adımların birbiriyle pürüzsüz konuşabilmesi için her adımın çıktısı kesinlikle yapılandırılmış bir formatta (tercihen JSON) alınmalıdır.</li>
+                    <li><strong>Koşullu Yönlendirmeler (Routing):</strong> Akışta statik bir yol izlemek yerine, ilk adımların sonuçlarına göre sonraki adımları dinamik olarak değiştirecek mantıksal yönlendirmeler kurgulanmalıdır.</li>
+                    <li><strong>Yedekli Durum Yönetimi:</strong> Herhangi bir adımda model beklenen formatın dışında bir yanıt üretirse, akışın kopmasını engelleyecek hata yakalama (try-catch) mekanizmaları kurulmalıdır.</li>
+                </ul>
+
+                <h2>Sonuç</h2>
+                <p>Komut mühendisliğini sadece güzel cümleler yazmaktan ayıran en önemli fark, sistemleri bu tür algoritmik akışlarla tasarlamaktır. PromptForge platformunda sunduğumuz tüm araçlar ve şablonlar, bu çok adımlı entegrasyon süreçlerini daha verimli ve güvenli hale getirmek üzere yapılandırılmıştır.</p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PromptForge. Tüm hakları saklıdır.</p>
+    </footer>
+
+</body>
+</html>
