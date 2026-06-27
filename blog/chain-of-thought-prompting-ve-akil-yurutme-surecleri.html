@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chain of Thought (CoT) Prompting ve Akıl Yürütme Süreçleri - PromptForge</title>
+    
+    <!-- İkon Sorununu Kökten Çözen Dinamik Çözücü -->
+    <script src="/favicon-resolver.js" defer></script>
+
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-color: #c9d1d9;
+            --text-muted: #8b949e;
+            --primary-color: #2ea44f;
+            --primary-hover: #2c974b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 2rem 1.5rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        header h1 a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        header h1 span {
+            color: var(--primary-color);
+        }
+
+        .tabs-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .tabs-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .tabs-nav a:hover {
+            color: var(--text-color);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .post-content h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .post-content p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .post-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .post-content li {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        pre {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.2rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        code {
+            font-family: ui-monospace, SFMono-Regular, SF Pro TXT, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.9rem;
+            color: #ff7b72;
+        }
+
+        pre code {
+            color: var(--text-color);
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><a href="/">Prompt<span>Forge</span></a></h1>
+        <div class="tabs-nav">
+            <a href="/">Araçlar</a>
+            <a href="/blog.html">Blog</a>
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <div class="post-meta">27 Haziran 2026 • Akıl Yürütme</div>
+            <h1 class="post-title">Chain of Thought (CoT) Prompting ve Akıl Yürütme Süreçleri</h1>
+            
+            <div class="post-content">
+                <p>Büyük dil modelleri (LLM) birçok dilde akıcı metinler üretebilir veya bilgiye dayalı basit soruları anında yanıtlayabilir. Ancak iş karmaşık mantık yürütmeye, matematik problemlerine veya çok adımlı analizlere geldiğinde, modellerin doğrudan cevaba yönelmesi genellikle hatalı sonuçlar ("halüsinasyon") üretmelerine yol açar. Yapay zekanın bu bilişsel sınırını aşmasını sağlayan en güçlü teknik <strong>Chain of Thought (CoT - Düşünce Zinciri) Prompting</strong> metodolojisidir.</p>
+
+                <h2>Chain of Thought (CoT) Nedir?</h2>
+                <p>Düşünce Zinciri (CoT), modele karmaşık bir soruyu yönlendirirken, nihai yanıta geçmeden önce problemi çözmek için izlediği **akıl yürütme adımlarını sırasıyla açıklamasını** söyleme yöntemidir. Tıpkı bir insanın zor bir matematik problemini zihinden çözmeye çalışmak yerine kağıt üzerinde adım adım çözmesi gibi, model de problemi daha küçük, mantıklı parçalara bölerek adım adım analiz eder.</p>
+                <p>Bu yaklaşım, modelin çalışma belleğini (context window) etkin bir şekilde kullanmasını sağlar ve her bir alt adımın bir sonraki adım için mantıksal bir temel oluşturmasına imkan tanır.</p>
+
+                <h2>Sihirli Cümle: "Adım Adım Düşünelim" (Zero-Shot CoT)</h2>
+                <p>Komut mühendisliği tarihindeki en büyük keşiflerden biri, modele hiçbir örnek vermeden bile sadece talimatın sonuna eklenen küçük bir ibareyle akıl yürütme becerisinin tetiklenebilmesidir. Akademik çalışmalarda, komutun sonuna eklenen **"Let's think step by step" (Adım adım düşünelim)** ifadesinin, modellerin karmaşık mantık ve matematik testlerindeki başarı oranını dramatik şekilde artırdığı kanıtlanmıştır.</p>
+
+                <h2>Geleneksel Prompting ve CoT Karşılaştırması</h2>
+                <p>Aşağıdaki örnek, bu iki yaklaşım arasındaki yapısal farkı ve çıktı kalitesini açıkça göstermektedir:</p>
+
+                <pre><code>[Geleneksel Yaklaşım (Standart)]
+Soru: Bir manavda 15 elma vardı. Manav 5 elma sattı, sonra toptancıdan 10 elma daha aldı. Elmaların yarısını da çürüdüğü için attı. Manavın elinde kaç elma kaldı?
+Yapay Zeka Yanıtı: Manavın elinde 12 elma kalmıştır. (Hatalı Sonuç)
+
+[Düşünce Zinciri (CoT) Yaklaşımı]
+Soru: [Aynı Soru] + "Lütfen problemi adım adım çöz ve her adımı açıkla."
+Yapay Zeka Yanıtı:
+1. Başlangıçta manavda 15 elma vardı.
+2. 5 elma satılınca geriye 10 elma kaldı (15 - 5 = 10).
+3. Toptancıdan 10 elma daha alınca elma sayısı 20 oldu (10 + 10 = 20).
+4. Elmaların yarısı çürüdüğü için atıldı. 20 elmanın yarısı 10'dur (20 / 2 = 10).
+5. Sonuç olarak manavın elinde 10 elma kalmıştır. (Doğru Sonuç)</code></pre>
+
+                <h2>CoT Prompting Ne Zaman Kullanılmalıdır?</h2>
+                <p>Her senaryoda Düşünce Zinciri kullanmak mantıklı değildir; çünkü bu yöntem modelin daha fazla belirteç (token) üretmesine ve dolayısıyla maliyet ile yanıt süresinin artmasına neden olur. CoT şu durumlarda tercih edilmelidir:</p>
+                <ul>
+                    <li><strong>Matematiksel Hesaplamalar:</strong> Çok adımlı aritmetik işlemler içeren tüm finansal veya mühendislik analizlerinde.</li>
+                    <li><strong>Mantıksal Akıl Yürütme:</strong> Karar ağaçları, bulmacalar veya neden-sonuç ilişkilerinin kurulması gereken karmaşık durumlarda.</li>
+                    <li><strong>Kod Analizi ve Refactoring:</strong> Bir yazılım kodunun hata ayıklama (debugging) süreçlerinde, hatanın kaynağını adım adım ararken.</li>
+                </ul>
+
+                <h2>Sonuç</h2>
+                <p>Geleceğin otonom sistemleri ve akıl yürütme (reasoning) modelleri, bu düşünce zinciri mekanizmalarını kendi mimarilerinde yerleşik olarak çalıştırmaktadır. PromptForge platformunda geliştirdiğimiz parametrik yapılar, modellerinizin en zorlu mantıksal süreçleri bile bu metodolojik şeffaflıkla çözmesini sağlamak üzere optimize edilmiştir.</p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PromptForge. Tüm hakları saklıdır.</p>
+    </footer>
+
+</body>
+</html>
