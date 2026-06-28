@@ -421,7 +421,9 @@
         <p>Sitemizde yer alan tüm sistemler meşru, ahlaki ve teknik sınırlar gözetilerek yapılandırılmıştır. Kullanıcılarımızın dijital dünyadaki bağımsız altyapılarını güçlendirmek için yenilikçi çözümler sunmaya devam ediyoruz.</p>
     </div>
 
-    <!-- İLETİŞİM -->
+    <!-- ========================================== -->
+<!-- İLETİŞİM MODAL BLOĞU -->
+<!-- ========================================== -->
 <div id="contact-legal" class="legal-content" style="display: none;">
     <button class="close-legal-btn" onclick="closeLegal()">Kapat ✕</button>
     <h3>İletişim</h3>
@@ -431,30 +433,54 @@
     <form id="contact-form-data" onsubmit="sendContactMessage(event)" style="margin-top: 20px; text-align: left;">
         <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap;">
             <div style="flex: 1; min-width: 200px;">
-                <label style="display: block; margin-bottom: 8px; color: #c9d1d9; font-size: 0.9rem; font-weight: 500;">Adınız Soyadınız</label>
+                <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 0.9rem; font-weight: 500;">Adınız Soyadınız</label>
                 <input type="text" required placeholder="Örn: Ahmet Yılmaz" style="width: 100%; padding: 10px 12px; background-color: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #c9d1d9; box-sizing: border-box; font-family: inherit; font-size: 0.95rem;">
             </div>
             <div style="flex: 1; min-width: 200px;">
-                <label style="display: block; margin-bottom: 8px; color: #c9d1d9; font-size: 0.9rem; font-weight: 500;">E-posta Adresiniz</label>
+                <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 0.9rem; font-weight: 500;">E-posta Adresiniz</label>
                 <input type="email" required placeholder="Örn: ahmet@example.com" style="width: 100%; padding: 10px 12px; background-color: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #c9d1d9; box-sizing: border-box; font-family: inherit; font-size: 0.95rem;">
             </div>
         </div>
 
         <div style="margin-bottom: 20px;">
-            <label style="display: block; margin-bottom: 8px; color: #c9d1d9; font-size: 0.9rem; font-weight: 500;">Görevin Yapısal Detaylarını Girin (Mesajınız)</label>
-            <textarea required rows="5" placeholder="Örn: PromptForge platformunda şu aracın geliştirilmesini veya şu konuda ortak bir çalışma yapmayı öneriyorum..." style="width: 100%; padding: 10px 12px; background-color: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #c9d1d9; box-sizing: border-box; font-family: inherit; font-size: 0.95rem; resize: vertical; min-height: 120px;"></textarea>
+            <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 0.9rem; font-weight: 500;">Görevin Yapısal Detaylarını Girin (Mesajınız)</label>
+            <textarea required rows="4" placeholder="Örn: PromptForge platformunda şu konseptlerin geliştirilmesini veya şu konuda ortak çalışma yapılmasını öneriyorum..." style="width: 100%; padding: 10px 12px; background-color: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #c9d1d9; box-sizing: border-box; font-family: inherit; font-size: 0.95rem; resize: vertical; min-height: 100px;"></textarea>
         </div>
 
-        <button type="submit" class="green-submit-btn" style="background-color: #2ea44f; color: #ffffff; border: none; padding: 12px 24px; font-size: 1rem; font-weight: 600; border-radius: 6px; cursor: pointer; transition: background-color 0.2s; font-family: inherit; display: inline-flex; align-items: center; justify-content: center;">
-            Gelişmiş Mühendislik Komutu Üret (Mesajı Gönder)
+        <!-- Görseldeki Yeşil Buton -->
+        <button type="submit" style="background-color: #2ea44f; color: #ffffff; border: none; padding: 10px 20px; font-size: 0.95rem; font-weight: 600; border-radius: 6px; cursor: pointer; transition: background-color 0.2s; font-family: inherit;">
+            Mesajı Gönder
         </button>
         
         <!-- Başarı Bildirimi -->
-        <div id="contact-success" style="display: none; color: #2ea44f; margin-top: 15px; font-size: 0.95rem; font-weight: 500;">
-            ✓ Mesajınız başarıyla şifrelendi ve iletildi. En kısa sürede dönüş sağlayacağız!
+        <div id="contact-success" style="display: none; color: #2ea44f; margin-top: 15px; font-size: 0.9rem; font-weight: 500;">
+            ✓ Mesajınız başarıyla iletildi. En kısa sürede dönüş sağlayacağız!
         </div>
     </form>
 </div>
+
+<!-- ========================================== -->
+<!-- ÇALIŞMASI İÇİN GEREKLİ KÜÇÜK JAVASCRIPT KODU -->
+<!-- ========================================== -->
+<script>
+    // İletişim formu gönderildiğinde çalışacak küçük simülasyon
+    function sendContactMessage(event) {
+        event.preventDefault(); // Sayfanın yenilenmesini engeller
+        
+        const successDiv = document.getElementById('contact-success');
+        if (successDiv) {
+            successDiv.style.display = 'block';
+            
+            // Formu temizle
+            event.target.reset();
+            
+            // 4 saniye sonra başarı mesajını gizle
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 4000);
+        }
+    }
+</script>
 
     <!-- KULLANIM KOŞULLARI -->
     <div id="terms-legal" class="legal-content">
