@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Correction ve Çıktı Doğrulama Yöntemleri - PromptForge</title>
+    
+    <!-- İkon Sorununu Kökten Çözen Dinamik Çözücü -->
+    <script src="/favicon-resolver.js" defer></script>
+
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-color: #c9d1d9;
+            --text-muted: #8b949e;
+            --primary-color: #2ea44f;
+            --primary-hover: #2c974b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 2rem 1.5rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        header h1 a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        header h1 span {
+            color: var(--primary-color);
+        }
+
+        .tabs-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .tabs-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .tabs-nav a:hover {
+            color: var(--text-color);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .post-content h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .post-content p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .post-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .post-content li {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        pre {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.2rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        code {
+            font-family: ui-monospace, SFMono-Regular, SF Pro TXT, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.9rem;
+            color: #ff7b72;
+        }
+
+        pre code {
+            color: var(--text-color);
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><a href="/">Prompt<span>Forge</span></a></h1>
+        <div class="tabs-nav">
+            <a href="/">Araçlar</a>
+            <a href="/blog.html">Blog</a>
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <div class="post-meta">28 Haziran 2026 • İleri Düzey Teknikler</div>
+            <h1 class="post-title">Self-Correction (Kendi Kendini Düzeltme) ve Çıktı Doğrulama Yöntemleri</h1>
+            
+            <div class="post-content">
+                <p>Yapay zeka modelleriyle üretim yaparken karşılaşılan en büyük zorluklardan biri, üretilen ilk yanıtın her zaman mükemmel olmamasıdır. Modeller bazen mantık hataları yapabilir, verilen kısıtlamaları gözden kaçırabilir ya da kodlama süreçlerinde küçük sözdizimi (syntax) kusurları bırakabilir. Geliştiricilerin bu durumu aşmak için kullandığı en etkili modern tekniklerden biri <strong>Self-Correction (Kendi Kendini Düzeltme)</strong> mekanizmalarıdır.</p>
+
+                <h2>Self-Correction Nedir?</h2>
+                <p>Self-Correction, bir yapay zeka modelinin ürettiği taslak çıktıyı yine kendisine veya daha spesifik bir denetleyici modele inceleterek, tespit edilen hataları otomatik olarak düzeltmesini sağlayan döngüsel bir komutlandırma yöntemidir. Model, önce görevi yerine getirir; ardından ikinci bir aşamada kendi ürettiği metni analiz ederek yönergelere uyumluluğunu denetler ve gerekirse çıktıyı revize eder.</p>
+
+                <h2>Kendi Kendini Düzeltme Döngüsü Nasıl Tasarlanır?</h2>
+                <p>Bu sistemi başarılı bir şekilde hayata geçirmek için genellikle üç temel adımdan oluşan bir akış kurgulanır:</p>
+                <ul>
+                    <li><strong>Taslak Üretimi (Drafting):</strong> Model, geleneksel yöntemlerle ilk çıktıyı üretir.</li>
+                    <li><strong>Eleştiri ve Denetim (Criticism/Evaluation):</strong> Modelden veya harici bir doğrulayıcı sistemden, üretilen taslağı belirli kriterlere (örneğin doğruluk, okunabilirlik, JSON format uyumluluğu) göre incelemesi ve varsa hataların listesini çıkarması istenir.</li>
+                    <li><strong>Düzeltme ve İyileştirme (Refinement):</strong> Elde edilen hata raporu referans alınarak, taslak metin yeniden düzenlenir ve nihai, temiz çıktı elde edilir.</li>
+                </ul>
+
+                <h2>Uygulamalı Kod ve Mantık Akışı Örneği</h2>
+                <p>Bir veri formatlama ve temizleme görevi için kurgulanmış self-correction mantıksal akışı şu adımlarla tasarlanabilir:</p>
+
+                <pre><code>[ADIM 1 - TASLAK ÜRETİMİ]
+Prompt: "Kullanıcı listesini JSON formatında ver."
+Çıktı: "İşte liste: { 'kullanici': 'Ahmet' } ... " (Hatalı: Metin ve JSON karışık)
+
+            │
+            ▼
+
+[ADIM 2 - ELEŞTİRİ VE ANALİZ]
+Prompt: "Yukarıdaki çıktıyı incele. Sadece saf JSON olması gerekirken metin içeriyor mu? 
+Hataları listele."
+Çıktı: "- Evet, başında açıklama metni var.
+        - JSON standart dışı tek tırnak kullanıyor."
+
+            │
+            ▼
+
+[ADIM 3 - REFORME ETME]
+Prompt: "Tespit edilen hataları düzelterek çıktıyı sadece saf ve geçerli bir JSON olarak sun."
+Çıktı: "{ \"kullanici\": \"Ahmet\" }"</code></pre>
+
+                <h2>Sistem Kararlılığı İçin En İyi Uygulamalar</h2>
+                <p>Self-correction yapılarını projelerinizde uygularken verimliliği artıracak bazı altın kurallar şunlardır:</p>
+                <ul>
+                    <li><strong>Farklı Rol Tanımları Kullanın:</strong> Taslak üreten model rolü ile denetleyen model rolünü birbirinden ayırın. Denetleyiciye "titiz bir kalite kontrol uzmanı" rolü atamak başarı oranını artırır.</li>
+                    <li><strong>Kesin Kriter Listeleri Sunun:</strong> Denetleme adımında modele "metni kontrol et" demek yerine, "Metinde yazım hatası var mı? Kod blokları çalışır durumda mı? Belirtilen sınır aşıldı mı?" gibi spesifik bir kontrol listesi (checklist) verin.</li>
+                    <li><strong>Döngü Sınırı Koyun:</strong> Modellerin sonsuz bir düzeltme döngüsüne girmesini önlemek için maksimum düzeltme adımını (örneğin en fazla 2 veya 3 yineleme) sistem düzeyinde sınırlandırın.</li>
+                </ul>
+
+                <h2>Sonuç</h2>
+                <p>Yapay zeka sistemlerini kendi hatalarını denetleyecek şekilde yapılandırmak, insan müdahalesine olan ihtiyacı minimize eder ve otomasyon süreçlerinin güvenilirliğini en üst düzeye çıkarır. PromptForge platformunda geliştirdiğimiz parametrik yapılar, bu tür akıllı kendi kendini düzeltme mekanizmalarını sistemlerinize en hızlı şekilde entegre etmeniz için tasarlanmıştır.</p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PromptForge. Tüm hakları saklıdır.</p>
+    </footer>
+
+</body>
+</html>
