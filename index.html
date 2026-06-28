@@ -304,6 +304,19 @@
             color: #fff;
             border-color: #fff;
         }
+
+        /* Sitedeki tüm yasal pencereleri (modalları) tek elden eşitleyen kod */
+    .legal-content, 
+    #contact-legal, 
+    #about-legal, 
+    #terms-legal, 
+    #privacy-legal {
+        max-width: 720px !important;    /* Tüm pencereleri tam olarak bu genişliğe sabitler */
+        width: 100% !important;         /* Mobil cihazlarda esnek kalmasını sağlar */
+        padding: 24px !important;       /* İçeriklerin kenar boşluklarını eşitler */
+        box-sizing: border-box !important; /* Genişlik hesaplama hatalarını engeller */
+        margin: 20px auto !important;   /* Pencereleri ekranda kusursuz ortalar */
+    }
     </style>
 </head>
 <body>
