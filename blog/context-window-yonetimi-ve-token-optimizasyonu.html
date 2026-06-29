@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Context Window Yönetimi ve Token Optimizasyonu - PromptForge</title>
+    
+    <script src="/favicon-resolver.js" defer></script>
+
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-color: #c9d1d9;
+            --text-muted: #8b949e;
+            --primary-color: #2ea44f;
+            --primary-hover: #2c974b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 2rem 1.5rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        header h1 a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        header h1 span {
+            color: var(--primary-color);
+        }
+
+        .tabs-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .tabs-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .tabs-nav a:hover {
+            color: var(--text-color);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .post-content h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .post-content p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .post-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .post-content li {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        pre {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.2rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        code {
+            font-family: ui-monospace, SFMono-Regular, SF Pro TXT, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.9rem;
+            color: #ff7b72;
+        }
+
+        pre code {
+            color: var(--text-color);
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><a href="/">Prompt<span>Forge</span></a></h1>
+        <div class="tabs-nav">
+            <a href="/">Araçlar</a>
+            <a href="/blog.html">Blog</a>
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <div class="post-meta">29 Haziran 2026 • Performans Optimizasyonu</div>
+            <h1 class="post-title">Context Window (Bağlam Penceresi) Yönetimi ve Token Optimizasyonu</h1>
+            
+            <div class="post-content">
+                <p>Yapay zeka modelleriyle çalışan uygulamalar geliştirirken karşılaşılan en büyük sınırlamalardan biri modelin "bellek" kapasitesidir. Teknik literatürde <strong>Context Window (Bağlam Penceresi)</strong> olarak adlandırılan bu alan, modelin tek bir işlem döngüsünde işleyebileceği maksimum veri miktarını belirler. Büyük dil modelleri verileri kelime kelime değil, <strong>token</strong> adı verilen anlamlı karakter grupları halinde okur. Bu nedenle, başarılı ve sürdürülebilir sistemler tasarlamak için etkin bir token yönetimi uygulamak şarttır.</p>
+
+                <h2>Context Window Neden Önemlidir?</h2>
+                <p>Bağlam penceresi, modele gönderdiğiniz komut (prompt), sistem talimatları, geçmiş konuşma kayıtları ve modelin üreteceği yanıtın toplam hacmini kapsar. Bu sınır aşıldığında sistem hata verir veya konuşmanın başındaki önemli ayrıntıları unutmaya başlar. Doğru bir token optimizasyonu, hem modelin kararlılığını artırır hem de veri işleme süreçlerindeki gecikmeleri (latency) minimuma indirir.</p>
+
+                <h2>Token Optimizasyonu İçin İleri Düzey Teknikler</h2>
+                <p>Uzun dokümanlar veya karmaşık otomasyon senaryoları ile çalışırken bağlam penceresini verimli kullanmanızı sağlayacak temel stratejiler şunlardır:</p>
+                <ul>
+                    <li><strong>Rol Tabanlı Budama (Sliding Window):</strong> Sohbet tabanlı sistemlerde geçmiş verilerin tamamını göndermek yerine, sadece son 5 veya 10 mesajlık aktif pencereyi sistemde tutarak eski token yüklerini temizleyin.</li>
+                    <li><strong>Özetleme Döngüsü (Conversational Summarization):</strong> Konuşma geçmişi belirli bir token sınırına yaklaştığında, modelden o ana kadarki konuşmayı teknik bir özet haline getirmesini isteyin. Geçmiş mesaj bloklarını silip, sadece bu kompakt özeti yeni komutların başına ekleyin.</li>
+                    <li><strong>Gereksiz Karakter Temizliği:</strong> Komut şablonları içindeki çoklu boşlukları, satır atlamalarını ve tekrarlayan açıklama cümlelerini temizleyin. Kod blokları aktarılırken yorum satırlarının ayıklanması ciddi miktarda token tasarrufu sağlar.</li>
+                </ul>
+
+                <h2>Uygulamalı Şablon: Sistem Talimatlarında Sıkıştırma</h2>
+                <p>Aşağıdaki örnekte, aynı amaca hizmet eden iki farklı komut yapısının token tüketim farkı gösterilmiştir:</p>
+
+                <pre><code>[HACİMLİ VE VERİMSİZ ŞABLON]
+"Senden ricam, verdiğim metinleri analiz ederken çok dikkatli olman. Lütfen yazım kurallarına 
+kesinlikle dikkat et ve bana her zaman sadece temiz bir liste halinde çıktı ver, başka hiçbir şey ekleme."
+(Tüketim: ~35 Token)
+
+            │
+            ▼
+
+[OPTİMİZE EDİLMİŞ ŞABLON]
+"Görevin: Metin analizi. Kısıtlar: Sadece yazım kurallarına uygun, temiz liste çıktısı üret. Ek açıklama yapma."
+(Tüketim: ~16 Token - %50'den fazla tasarruf)</code></pre>
+
+                <h2>Format Seçiminin Token Tüketimine Etkisi</h2>
+                <p>Veri yapılarının aktarımında kullanılan formatlar da token sarfiyatını doğrudan etkiler. Yapılan teknik analizlere göre, modeller verileri işlerken XML veya JSON etiketlerini yapısal olarak tanımak adına daha fazla token harcayabilir. Eğer sisteminiz destekliyorsa, ham metin veya Markdown listeleri kullanmak, JSON nesnelerine kıyasla bağlam penceresinde daha az yer kaplar.</p>
+
+                <h2>Sonuç</h2>
+                <p>Token optimizasyonu, sadece bütçe ve hız kazancı sağlamaz; aynı zamanda modelin odaklanma yeteneğini artırarak çok daha tutarlı ve amaca yönelik yanıtlar üretmesini mümkün kılar. PromptForge üzerinde inşa edeceğiniz tüm otomasyon ve komut mimarilerinde bu kuralları göz önünde bulundurmak, projelerinizin teknik altyapısını güçlendirecektir.</p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PromptForge. Tüm hakları saklıdır.</p>
+    </footer>
+
+</body>
+</html>
