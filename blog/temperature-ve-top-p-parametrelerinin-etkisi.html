@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature ve Top-P Parametrelerinin Çıktı Çeşitliliğine Etkisi - PromptForge</title>
+    
+    <script src="/favicon-resolver.js" defer></script>
+
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-color: #c9d1d9;
+            --text-muted: #8b949e;
+            --primary-color: #2ea44f;
+            --primary-hover: #2c974b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 2rem 1.5rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        header h1 a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        header h1 span {
+            color: var(--primary-color);
+        }
+
+        .tabs-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .tabs-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .tabs-nav a:hover {
+            color: var(--text-color);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .post-content h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .post-content p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .post-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .post-content li {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        pre {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.2rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        code {
+            font-family: ui-monospace, SFMono-Regular, SF Pro TXT, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.9rem;
+            color: #ff7b72;
+        }
+
+        pre code {
+            color: var(--text-color);
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><a href="/">Prompt<span>Forge</span></a></h1>
+        <div class="tabs-nav">
+            <a href="/">Araçlar</a>
+            <a href="/blog.html">Blog</a>
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <div class="post-meta">29 Haziran 2026 • Yapay Zeka Mühendisliği</div>
+            <h1 class="post-title">Temperature ve Top-P Parametrelerinin Çıktı Çeşitliliğine Etkisi</h1>
+            
+            <div class="post-content">
+                <p>Büyük dil modelleri (LLM), yapısal olarak bir sonraki kelimenin veya karakter grubunun (token) ne olacağını tahmin eden olasılıksal sistemlerdir. Model bir metin üretirken, havuzdaki binlerce kelime arasından en uygun olanları seçer. Bu seçim sürecinin ne kadar katı, kurumsal veya ne kadar esnek ve özgün olacağını kontrol eden iki temel mekanizma vardır: <strong>Temperature</strong> ve <strong>Top-P (Nucleus Sampling)</strong>.</p>
+
+                <h2>1. Temperature Parametresi Nedir?</h2>
+                <p>Temperature (Sıcaklık), modelin üreteceği kelime olasılıklarının dağılımını düzleştiren ya da keskinleştiren bir katsayıdır. Genellikle 0.0 ile 2.0 arasında bir değer alır:</p>
+                <ul>
+                    <li><strong>Düşük Dereceler (Örn: 0.0 - 0.2):</strong> Modeli son derece kararlı ve deterministik hale getirir. Model, her seferinde olasılığı en yüksek olan kelimeyi seçer. Kod yazımı, matematiksel analizler ve veri çıkarma gibi kesinlik gerektiren görevler için idealdir.</li>
+                    <li><strong>Yüksek Dereceler (Örn: 0.7 - 1.2):</strong> Düşük olasılıklı kelimelerin de seçilme şansını artırır. Bu durum çıktıya esneklik ve beklenmedik ifadeler kazandırır. Hikaye yazımı, beyin fırtınası veya reklam metni türetme süreçlerinde tercih edilir.</li>
+                </ul>
+
+                <h2>2. Top-P (Nucleus Sampling) Nedir?</h2>
+                <p>Top-P parametresi, kelime havuzunun toplam kümülatif olasılık sınırını belirler. Model, kelimeleri en yüksek olasılıktan en düşüğe doğru sıralar ve sadece bu belirlenen yüzdeye (P değerine) giren "çekirdek" kelimeleri dikkate alır:</p>
+                <ul>
+                    <li>Eğer <code>Top-P = 0.90</code> olarak ayarlanırsa, model sadece toplam olasılıkların %90'ını oluşturan en güvenilir kelime grubunu listeye alır ve kalan %10'luk uç değerleri tamamen eler.</li>
+                    <li>Bu parametre, yüksek sıcaklık değerlerinde bile modelin tamamen anlamsız, saçma veya bağlam dışı kelimeler üretmesini engelleyen bir emniyet kemeri görevi görür.</li>
+                </ul>
+
+                <h2>Parametrelerin Kullanım Senaryoları Tablosu</h2>
+                <p>Geliştirdiğiniz projelerde en iyi performansı almak için iş yükünüze uygun parametre kombinasyonlarını seçmeniz gerekir:</p>
+
+                <pre><code>[SENARYO: VERİ ANALİZİ & KODLAMA]
+- Temperature: 0.0
+- Top-P: 1.0
+Sonuç: Odaklanmış, hata payı minimum, tekrarlanabilir çıktılar.
+
+[SENARYO: İÇERİK GELİŞTİRME & SOSYAL MEDYA]
+- Temperature: 0.7
+- Top-P: 0.9
+Sonuç: Doğal akışa sahip, akıcı ve özgün anlatımlar.
+
+[SENARYO: MAKSİMUM ESNEKLİK & BEYİN FIRTINASI]
+- Temperature: 1.0
+- Top-P: 0.95
+Sonuç: Alışılmışın dışında fikirler, sıra dışı metaforlar.</code></pre>
+
+                <h2>Alt Seviye Optimizasyon Kuralları</h2>
+                <p>Uygulamalarınızda bu parametreleri optimize ederken akılda tutulması gereken en önemli mühendislik kuralı, iki parametreyi aynı anda büyük oranlarda değiştirmemektir. API dökümantasyonlarında da önerildiği üzere, genellikle ya Temperature değerini sabit tutup Top-P üzerinde oynama yapmalı ya da tam tersi bir strateji izlemelisiniz. İkisini birden üst sınırlara çekmek, çıktı kalitesinde yapısal bozulmalara yol açabilir.</p>
+
+                <h2>Sonuç</h2>
+                <p>PromptForge platformunda tasarladığınız şablonların gücü, sadece doğru kelimeleri seçmekte değil, modelin çalışma parametrelerine de hakim olmaktan geçer. Temperature ve Top-P değerlerini doğru kurgulayarak, aynı komut yapısından tamamen farklı amaca hizmet eden çıktılar elde edebilir ve sistem kararlılığını optimize edebilirsiniz.</p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PromptForge. Tüm hakları saklıdır.</p>
+    </footer>
+
+</body>
+</html>
