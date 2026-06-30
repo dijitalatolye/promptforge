@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Few-Shot Prompting Tasarım Kalıpları - PromptForge</title>
+    
+    <!-- İkon Sorununu Kökten Çözen Dinamik Çözücü -->
+    <script src="/favicon-resolver.js" defer></script>
+
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-color: #c9d1d9;
+            --text-muted: #8b949e;
+            --primary-color: #2ea44f;
+            --primary-hover: #2c974b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 2rem 1.5rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        header h1 a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        header h1 span {
+            color: var(--primary-color);
+        }
+
+        .tabs-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .tabs-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .tabs-nav a:hover {
+            color: var(--text-color);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .post-content h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .post-content p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .post-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .post-content li {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        pre {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.2rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        code {
+            font-family: ui-monospace, SFMono-Regular, SF Pro TXT, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.9rem;
+            color: #ff7b72;
+        }
+
+        pre code {
+            color: var(--text-color);
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><a href="/">Prompt<span>Forge</span></a></h1>
+        <div class="tabs-nav">
+            <a href="/">Araçlar</a>
+            <a href="/blog.html">Blog</a>
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <div class="post-meta">30 Haziran 2026 • Yapay Zeka Mühendisliği</div>
+            <h1 class="post-title">Few-Shot Prompting (Birkaç Örnekle Komutlandırma) Tasarım Kalıpları</h1>
+            
+            <div class="post-content">
+                <p>Büyük dil modellerine (LLM) bir görevi anlatmanın en temel yolu düz metin talimatları vermektir. Ancak görev karmaşıklaştıkça, kurallar dizisi uzadıkça veya çıktı formatının çok spesifik kurallara uyması gerektiğinde metinsel açıklamalar yetersiz kalabilir. Yapay zekaya sadece ne yapacağını "söylemek" yerine, ona birkaç somut girdi-çıktı çifti göstererek eğitme tekniğine <strong>Few-Shot Prompting</strong> denir.</p>
+
+                <h2>Few-Shot Prompting Nedir?</h2>
+                <p>Few-Shot Prompting, modele ana görevi vermeden önce bağlam penceresi içinde (in-context) kılavuzluk edecek 2 ila 5 arasında ideal örnek sunma sürecidir. Model, bu örnekleri inceleyerek hem mantıksal akışı hem de hedef organizasyon yapısını çözer. Hiç örnek verilmeden yapılan komutlandırmaya <em>Zero-Shot</em>, tek bir örnek verilmesine ise <em>One-Shot</em> adı verilir.</p>
+
+                <h2>Yapısal Örnekleme Şablonu Nasıl Kurgulanır?</h2>
+                <p>Örneklerin model tarafından yanlış anlaşılmasını önlemek için girdi ve çıktı alanlarını çok net ayıran, tekrarlanabilir etiketler kullanılmalıdır. İşte başarılı bir Few-Shot tasarım kalıbı mimarisi:</p>
+
+                <pre><code>Girdi: "Bugün hava çok kasvetli, içim daraldı."
+Analiz: Duygu -> Negatif, Yoğunluk -> Yüksek
+
+Girdi: "Sistem güncellemeleri tamamlandı, her şey harika çalışıyor."
+Analiz: Duygu -> Pozitif, Yoğunluk -> Yüksek
+
+Girdi: "Toplantı saat ikide başlayacakmış."
+Analiz: Duygu -> Nötr, Yoğunluk -> Yok
+
+Girdi: "Telefonun şarjı biraz çabuk bitiyor gibi ama idare eder."
+Analiz: [Model burayı üstteki kalıba göre dolduracaktır]</code></pre>
+
+                <h2>Maksimum Performans İçin Tasarım Kuralları</h2>
+                <p>Projelerinizde few-shot kalıplarını uygularken sıfır hata oranına ulaşmak için şu teknik detaylara dikkat etmelisiniz:</p>
+                <ul>
+                    <li><strong>Çeşitlilik ve Denge:</strong> Verdiğiniz örneklerin tek taraflı olmamasına özen gösterin. Sadece olumlu örnekler verirseniz model taraflılık (bias) geliştirebilir. Olası tüm senaryolardan (olumlu, olumsuz, istisnai durumlar) en az birer örnek ekleyin.</li>
+                    <li><strong>Sıralama Etkisi (Recency Bias):</strong> Modeller, komut penceresinin en sonunda yer alan örneklere daha fazla ağırlık verme eğilimindedir. Bu yüzden en kritik veya en belirleyici örneğinizi listenin en sonuna yerleştirin.</li>
+                    <li><strong>Sözdizimi Tutarlılığı:</strong> Örnekler arasında kullandığınız ayraçlar (Örn: `###`, `---` veya `Girdi/Çıktı:` etiketleri) tüm blok boyunca milimetrik olarak aynı kalmalıdır. Biçimsel kaymalar modelin yapısal algısını bozar.</li>
+                </ul>
+
+                <h2>Chain-of-Thought (Düşünce Zinciri) ile Birleştirme</h2>
+                <p>Few-Shot tekniğinin gücü, <em>Chain-of-Thought</em> (Düşünce Zinciri) metodu ile birleştirildiğinde katlanarak artar. Örneklere sadece ham girdi ve çıktıları yazmak yerine, o çıktıya **hangi mantık adımlarıyla ulaşıldığını da** ara adımlar halinde yazarsanız, model karmaşık matematiksel ya da analitik problemlerde olağanüstü yüksek bir doğruluk oranına ulaşır.</p>
+
+                <h2>Sonuç</h2>
+                <p>Few-Shot Prompting, yapay zeka modellerini kurumsal otomasyon sistemlerine ve hassas veri hatlarına (data pipelines) entegre ederken en çok başvurulan güvenli limandır. PromptForge üzerinde geliştireceğiniz araçlarda bu kalıpları referans almak, çıktı doğruluğunuzu yapısal olarak güvence altına alacaktır.</p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PromptForge. Tüm hakları saklıdır.</p>
+    </footer>
+
+</body>
+</html>
