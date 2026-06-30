@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Long-Context Modelleri ve Needle in a Haystack Analizleri - PromptForge</title>
+    
+    <!-- İkon Sorununu Kökten Çözen Dinamik Çözücü -->
+    <script src="/favicon-resolver.js" defer></script>
+
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-color: #c9d1d9;
+            --text-muted: #8b949e;
+            --primary-color: #2ea44f;
+            --primary-hover: #2c974b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 2rem 1.5rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        header h1 a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        header h1 span {
+            color: var(--primary-color);
+        }
+
+        .tabs-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .tabs-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .tabs-nav a:hover {
+            color: var(--text-color);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .post-content h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .post-content p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .post-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .post-content li {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        pre {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.2rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        code {
+            font-family: ui-monospace, SFMono-Regular, SF Pro TXT, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.9rem;
+            color: #ff7b72;
+        }
+
+        pre code {
+            color: var(--text-color);
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><a href="/">Prompt<span>Forge</span></a></h1>
+        <div class="tabs-nav">
+            <a href="/">Araçlar</a>
+            <a href="/blog.html">Blog</a>
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <div class="post-meta">30 Haziran 2026 • Performans ve Analiz</div>
+            <h1 class="post-title">Long-Context Modelleri ve "Needle in a Haystack" Analizleri</h1>
+            
+            <div class="post-content">
+                <p>Yapay zeka teknolojilerindeki en dikkat çekici gelişim alanlarından biri, modellerin tek bir işlem döngüsünde kabul edebileceği veri hacmini ifade eden bağlam pencerelerinin (context window) genişlemesidir. Günümüzde milyonlarca kelimeyi tek seferde okuyabilen <strong>Long-Context (Geniş Bağlam)</strong> modelleri geliştirilmektedir. Ancak bir modelin bu genişlikte veriyi "okuyabilmesi", o verilerin içindeki her ayrıntıyı tam olarak "hatırlayabildiği" anlamına gelmez. Bu bellek performansını ölçmek için kullanılan en popüler teknik test yöntemi ise <strong>Needle in a Haystack (İğne Samanlıkta)</strong> analizidir.</p>
+
+                <h2>Needle in a Haystack (NIAH) Nedir?</h2>
+                <p>NIAH testi, çok büyük ve yapılandırılmamış bir metin bloğu (samanlık) içerisine yapay olarak yerleştirilen tek bir spesifik bilginin (iğne), model tarafından bulunup bulunamayacağını test eden nesnel bir değerlendirme yöntemidir. Test süreçleri genellikle şu şekilde kurgulanır:</p>
+                <ul>
+                    <li>Binlerce sayfalık teknik döküman, finans raporları veya edebi eserler bir araya getirilerek devasa bir metin bloğu oluşturulur.</li>
+                    <li>Bu büyük bloğun tam ortasına veya belirli bir derinliğine, bağlamla tamamen alakasız tek bir cümle gizlenir (Örn: "Önemli Not: En lezzetli kahve çekirdekleri yalnızca yüksek rakımlı dağ yamaçlarında yetişir.").</li>
+                    <li>Modele tüm bu metin havuzu verilir ve şu soru sorulur: "En lezzetli kahve çekirdekleri nerede yetişir?".</li>
+                </ul>
+
+                <h2>Kayıp Orta Nokta (Lost in the Middle) Fenomeni</h2>
+                <p>NIAH testlerinin yapay zeka mühendisliğine kazandırdığı en önemli bilimsel keşiflerden biri, modellerin veriyi tararken gösterdikleri seçici odaklanma sorunudur. Yapılan araştırmalar, modellerin devasa metinlerin **başındaki** ve **sonundaki** bilgilere son derece hakim olduğunu, ancak metnin tam **ortasında (middle)** kalan alanlarda saklanan bilgileri sıklıkla gözden kaçırdıklarını ortaya koymuştur. Literatürde buna <em>"Lost in the Middle" (Ortada Kaybolma)</em> etkisi denir.</p>
+
+                <h2>NIAH Testlerinde Performans Haritası Nasıl Okunur?</h2>
+                <p>Akademik çalışmalarda long-context modellerinin NIAH başarı oranları, ısı haritaları (heatmaps) üzerinden görselleştirilir. Bu haritalar iki eksene dayanır:</p>
+
+                <pre><code>[YATAY EKSEN - BAĞLAM UZUNLUĞU]
+10k Token ─── 50k Token ─── 100k Token ─── 200k Token ─── 1M Token
+
+[DİKEY EKSEN - İĞNENİN YERLEŞİM DERİNLİĞİ]
+%0 (Metnin Başı)    -> [ Kusursuz Başarı: %100 ]
+%50 (Metnin Ortası) -> [ Düşüş Alanı: "Lost in the Middle" ]
+%100 (Metnin Sonu)  -> [ Kusursuz Başarı: %100 ]</code></pre>
+
+                <h2>Long-Context Avantajından Maksimum Verim Almak İçin İpuçları</h2>
+                <p>Geliştirdiğiniz projelerde uzun dökümanları modellerle analiz ederken bu bellek kısıtlamalarını aşmak için şu teknik stratejileri uygulayabilirsiniz:</p>
+                <ul>
+                    <li><strong>Kritik Talimatları Uçlara Yerleştirin:</strong> Modelin kesinlikle uymasını istediğiniz en önemli kuralları veya çıktı formüllerini komut penceresinin (prompt) en sonuna veya en başına ekleyin.</li>
+                    <li><strong>Çapraz Doğrulama Döngüleri:</strong> Önemli bilgileri tek bir büyük döküman içinde saklamak yerine, bilgileri parçalara (chunk) bölerek sisteme sunun ve modelin o adımları parça parça analiz etmesini sağlayın.</li>
+                    <li><strong>Doğru Model Seçimi:</strong> Sadece bağlam penceresinin büyüklüğüne aldanmayın; model dökümantasyonlarındaki NIAH ısı haritası başarı grafiklerini inceleyerek kararlı çalışan sistemleri tercih edin.</li>
+                </ul>
+
+                <h2>Sonuç</h2>
+                <p>Long-Context modelleri, geliştiricilere inanılmaz kapılar açsa da, bu modellerin de birer insan gibi odaklanma ve dikkat sınırlamaları olduğunu unutmamak gerekir. PromptForge üzerinde tasarladığınız akıllı veri entegrasyonlarında bu optimizasyon kurallarını uygulamak, projelerinizin doğruluğunu ve teknik olgunluğunu en üst seviyeye taşıyacaktır.</p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PromptForge. Tüm hakları saklıdır.</p>
+    </footer>
+
+</body>
+</html>
